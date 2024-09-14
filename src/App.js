@@ -6,7 +6,7 @@ function App() {
   
   return (
     <div className="app">
-        <div className="container"></div> 
+        <div className="container">
           <div className="top">
             <div className="location">
               <p>Dublin</p>
@@ -29,6 +29,7 @@ function App() {
               <p> 12 MPH</p>
             </div>
           </div>   
+        </div> 
     </div>
   );
 }
