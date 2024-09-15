@@ -22,6 +22,10 @@ function App() {
 
   return (
     <div className={`app ${isDataLoaded ? 'app--loaded' : ''}`}>
+      {/* Single h1 that contains line breaks, disappears after data is loaded */}
+      {!isDataLoaded && (
+        <h1 className="app__header">Clarke<br/>Weather<br/>Inc.</h1>
+      )}
       <div className="app__search">
         <form className="app__form" onSubmit={searchLocation}>
           <input
@@ -47,7 +51,7 @@ function App() {
           </div>
         </div>
 
-                {data.name !== undefined && (
+        {data.name !== undefined && (
           <div className="app__bottom">
             <div className="app__feels">
               <p>Feels like:</p>

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap');
 
 /* Apply Outfit font globally */
 html, body {
@@ -52,6 +53,21 @@ html, body {
   padding: 1rem;
 }
 
+.app__header {
+  text-align: center;
+  font-family: 'Fascinate Inline', cursive; /* Or another fun font */
+  color: #ffffff;
+  font-size: 4rem; /* Adjust size as needed */
+  line-height: 1.2; /* Adjust spacing between lines */
+  margin-bottom: 2rem; /* Space between the heading and the search bar */
+}
+
+.app__header h1 {
+  margin: 0;
+}
+
+
+
 /* Element: app__input */
 .app__input {
   padding: .7rem 1.5rem;
@@ -67,7 +83,10 @@ html, body {
   font-family: 'Outfit', sans-serif;
   box-sizing: border-box;
 }
-
+.app__input::placeholder {
+  color: #f8f8f8; /* Example: light white */
+  opacity: 1;
+}
 /* Element: app__button */
 .app__button {
   margin-top: 10px;
