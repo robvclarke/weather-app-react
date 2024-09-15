@@ -24,13 +24,19 @@ function App() {
   return (
     <div className={`app ${isDataLoaded ? 'loaded' : ''}`}>
         <div className="search">
-          <input 
-          value={location} 
-          onChange={event => setLocation(event.target.value)}
-          onKeyPress={searchLocation}
-          placeholder="Enter Location"
-          type="text"/>
-        </div>
+        {/* Wrap the input and button inside a form */}
+        <form onSubmit={searchLocation}>
+          <input
+            value={location}
+            onChange={(event) => setLocation(event.target.value)}
+            placeholder="Enter Location"
+            type="text"
+          />
+          {/* Add the search button */}
+          <button type="submit">Search</button>
+        </form>
+      </div>
+
         <div className="container">
           <div className="top">
             <div className="location">
