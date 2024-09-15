@@ -1,36 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-/* Apply font globally */
-* {
-  box-sizing: border-box;
+/* Apply Outfit font globally */
+html, body {
+  font-family: 'Outfit', sans-serif;
+  color: white;
+  font-size: 16px;
   margin: 0;
   padding: 0;
-  font-family: 'Outfit', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; /* Ensure font is applied globally */
+  font-weight: 400;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: white; /* Default color for text */
-}
-
-p {
-  font-size: 1.6rem; /* Paragraph styling */
-}
-
-h1 {
-  font-size: 6rem; /* Heading styling */
-}
-
+/* Block: app */
 .app {
   width: 100%;
   height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center search bar vertically */
+  justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, .4);
   color: white;
@@ -38,12 +26,13 @@ h1 {
   transition: all 0.5s ease;
 }
 
-.app.loaded {
-  justify-content: flex-start; /* Move search bar to the top */
+.app--loaded {
+  justify-content: flex-start;
   align-items: center;
   padding-top: 20px;
 }
 
+/* Background image using pseudo-element */
 .app:before {
   content: '';
   background: url('./assets/Dublin.jpg') no-repeat top center/cover;
@@ -54,60 +43,118 @@ h1 {
   left: 0;
   z-index: -1;
   transform: rotate(-2deg) scale(1.1);
+  pointer-events: none;
 }
 
-.app .search {
+/* Element: app__search */
+.app__search {
   text-align: center;
   padding: 1rem;
 }
 
-.app input {
+/* Element: app__input */
+.app__input {
   padding: .7rem 1.5rem;
   font-size: 1.2rem;
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, .8);
   background: rgba(255, 255, 255, .2);
-  color: white; /* Ensure text inside the input is white */
-}
-
-::placeholder {
-  color: #f8f8f8;
-}
-
-/* Top section with margin and padding */
-.container {
-  max-width: 700px;
+  color: white;
   width: 100%;
-  margin: 2rem auto; /* Increased margin for spacing */
-  padding: 2rem 1rem; /* Increased padding for spacing */
+  max-width: 300px;
+  margin: 0 auto;
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Element: app__button */
+.app__button {
+  margin-top: 10px;
+  padding: .7rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, .2);
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto 0;
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  box-sizing: border-box;
+}
+
+.app__button:hover {
+  background-color: rgba(255, 255, 255, .4);
+}
+
+/* Element: app__container */
+.app__container {
+  max-width: 700px; /* Constrain width on larger screens */
+  width: 100%;      /* Full width on smaller screens */
+  margin: 1.5rem auto;
+  padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   opacity: 0;
   transition: opacity 0.5s ease;
+  box-sizing: border-box; /* Ensure padding is included in width */
 }
 
-.app.loaded .container {
+.app--loaded .app__container {
   opacity: 1;
 }
 
-/* Bottom section with spacing */
-.app .bottom {
+/* Element: app__top */
+.app__top {
+  margin-bottom: .5rem;
+  padding: .5rem;
+  font-size: 1.2rem;
+}
+
+/* Ensure Temperature in app__temp is bold */
+.app__temp h1 {
+  font-size: 6rem;
+  font-weight: 700; /* Ensure bold for temperature */
+  margin: 0;
+}
+
+/* Element: app__bottom */
+.app__bottom {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between; /* Keep elements evenly spaced */
   text-align: center;
-  width: 100%;
-  margin: 6rem auto; /* Increase margin for spacing between top and bottom */
-  padding: 1rem; /* Increase padding for spacing */
-  border-radius: 5px;
+  width: 100%; /* Full width */
+  max-width: 700px; /* Constrain the width on larger screens */
+  padding: 1rem;
   background-color: rgba(255, 255, 255, .2);
+  border-radius: 5px;
+  box-sizing: border-box; /* Include padding in width */
+  margin: 0 auto; /* Center content */
 }
 
-.bold {
-  font-weight: 700; /* Bold font styling */
+/* Fix for smaller screens */
+@media (max-width: 600px) {
+  .app__bottom {
+    padding: 0.7rem; /* Adjust padding for small screens */
+    width: 100%; /* Full width on small screens */
+  }
+
+  .app__container {
+    padding: 1rem; /* Reduce container padding */
+  }
 }
 
-.location p, .description p, .temp h1, .bottom p {
-  font-family: 'Outfit', sans-serif; /* Ensure font applies to all dynamic data */
-  color: white; /* Ensure text color is white */
+/* Labels: Normal weight */
+.app__bottom p {
+  font-weight: 400; 
+  font-size: 1.2rem;
+}
+
+/* Bold class for API data */
+.app__bottom .app__bold {
+  font-weight: 700 !important; /* Force heavier weight for API data */
 }
