@@ -44,6 +44,23 @@ h1 {
   transform: rotate(-2deg) scale(1.1);
 }
 
+.app .search {
+    text-align: center;
+    padding: 1rem;
+}
+
+.app input {
+  padding: .7rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, .8);
+  background: rgba(255, 255, 255, .2);
+}
+
+::placeholder {
+  color: #f8f8f8;
+}
+
  .container {
   max-width: 700px;
   height: 700px;
