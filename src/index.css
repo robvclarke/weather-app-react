@@ -162,18 +162,6 @@ html, body {
   margin: 0 auto; /* Center content */
 }
 
-/* Fix for smaller screens */
-@media (max-width: 600px) {
-  .app__bottom {
-    padding: 0.7rem; /* Adjust padding for small screens */
-    width: 100%; /* Full width on small screens */
-  }
-
-  .app__container {
-    padding: 1rem; /* Reduce container padding */
-  }
-}
-
 /* Labels: Normal weight */
 .app__bottom p {
   font-weight: 400; 
@@ -194,3 +182,21 @@ html, body {
   max-width: 100px;  /* Set the size of the image */
   height: auto;      /* Keep the aspect ratio */
 }
+
+/* Fix for smaller screens */
+
+
+  @media (max-width: 600px) {
+        .app:before {
+          background: url('./assets/Dublin.jpg') no-repeat center/cover;
+        }
+      
+      .app__container {
+        padding: 1rem; /* Reduce container padding */
+      }
+
+      .app__bottom {
+        padding: 0.7rem; /* Adjust padding for small screens */
+        width: 100%; /* Full width on small screens */
+    }
+  }
