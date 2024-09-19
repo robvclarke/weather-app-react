@@ -60,10 +60,17 @@ html, body {
   font-size: 4rem; /* Adjust size as needed */
   line-height: 1.2; /* Adjust spacing between lines */
   margin-bottom: 2rem; /* Space between the heading and the search bar */
+  animation: subtleScale 1.5s ease-in-out infinite;
 }
 
-.app__header h1 {
-  margin: 0;
+/* Define keyframes for subtle scale */
+@keyframes subtleScale {
+  0%, 100% {
+    transform: scale(1); /* Normal size */
+  }
+  50% {
+    transform: scale(1.02); /* Slight scale up */
+  }
 }
 
 
@@ -176,4 +183,14 @@ html, body {
 /* Bold class for API data */
 .app__bottom .app__bold {
   font-weight: 700 !important; /* Force heavier weight for API data */
+}
+
+.app__image {
+  margin-top: 60px; /* Space between the search bar and the image */
+  text-align: center; /* Center the image */
+}
+
+.app__image img {
+  max-width: 100px;  /* Set the size of the image */
+  height: auto;      /* Keep the aspect ratio */
 }

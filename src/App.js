@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import weatherIcon from './assets/Weather_Icon.png';
 
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState('');
+  const [showHeader, setShowHeader] = useState(true); // Control for header and image visibility
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=0c52510bae0c2562825677b090d11b6b`;
 
@@ -12,6 +14,7 @@ function App() {
     if (location) {
       axios.get(url).then((response) => {
         setData(response.data);
+        setShowHeader(false);  // Remove header immediately when data is loaded
         console.log(response.data);
       });
       setLocation('');
@@ -22,10 +25,11 @@ function App() {
 
   return (
     <div className={`app ${isDataLoaded ? 'app--loaded' : ''}`}>
-      {/* Single h1 that contains line breaks, disappears after data is loaded */}
-      {!isDataLoaded && (
+      {/* Header that disappears when data is loaded */}
+      {showHeader && (
         <h1 className="app__header">Clarke<br/>Weather<br/>Inc.</h1>
       )}
+
       <div className="app__search">
         <form className="app__form" onSubmit={searchLocation}>
           <input
@@ -37,7 +41,18 @@ function App() {
           />
           <button className="app__button" type="submit">Search</button>
         </form>
+
+        {/* Custom PNG below the search button */}
+        {showHeader && (
+          <div className="app__image">
+              <img
+              src={weatherIcon}  // Use the imported image
+              alt="decorative weather icon"
+            />
+          </div>
+        )}
       </div>
+
       <div className="app__container">
         <div className="app__top">
           <div className="app__location">
