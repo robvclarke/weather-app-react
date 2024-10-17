@@ -13,27 +13,22 @@ html, body {
 }
 
 /* Block: app */
+/* Base styles for the app */
 .app {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, .4);
   color: white;
   overflow: hidden;
   transition: all 0.5s ease;
+  padding-top: 40px; /* Ensure content starts below the navbar */
 }
 
-.app--loaded {
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 20px;
-}
-
-/* Background image using pseudo-element */
+/* Apply the background image and overlay using a pseudo-element */
 .app:before {
   content: '';
   background: url('./assets/Dublin.jpg') no-repeat top center/cover;
@@ -42,12 +37,78 @@ html, body {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: -1;
-  transform: rotate(-2deg) scale(1.1);
+  z-index: -2; /* Ensure it is behind all content */
+  transform: rotate(-2deg) scale(1.1); /* Rotate and scale */
   pointer-events: none;
 }
 
-/* Element: app__search */
+/* Add a separate overlay effect to darken consistently */
+.app:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2); /* Uniform dark overlay */
+  z-index: -1; /* Ensure this is behind the content but above the image */
+  pointer-events: none;
+}
+
+
+/* Navbar */
+.navbar {
+  width: 100%; /* Full width */
+  background-color: #333; /* Adjust as needed */
+  color: white;
+  padding: 1rem 2rem; /* Add horizontal padding */
+  box-sizing: border-box;
+  position: fixed; /* Make sure it's fixed at the top */
+  top: 0; /* Stick to the top */
+  left: 0; /* Align to the left edge */
+  z-index: 100; /* Ensure it stays above other elements */
+  display: flex; /* Ensure it displays as a flex container */
+  justify-content: space-between; /* Space between the logo and links */
+  align-items: center; /* Center items vertically */
+}
+
+/* Container to space navbar contents */
+.navbar__logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar__links {
+  list-style: none;
+  display: flex; /* Ensure the items are in a row */
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__links li {
+  margin-left: 1.5rem; /* Space between nav items */
+}
+
+.navbar__links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Active Link Style */
+.navbar__links .active {
+  color: #f39c12; /* Highlight color for the active link */
+  text-decoration: underline;
+}
+
+/* Container for main page content */
+.page-container {
+  padding-top: 80px; /* Ensure content starts below the navbar */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Search bar and button */
 .app__search {
   text-align: center;
   padding: 1rem;
@@ -55,25 +116,23 @@ html, body {
 
 .app__header {
   text-align: center;
-  font-family: 'Fascinate Inline', cursive; /* Or another fun font */
+  font-family: 'Fascinate Inline', cursive;
   color: #ffffff;
-  font-size: 4rem; /* Adjust size as needed */
-  line-height: 1.2; /* Adjust spacing between lines */
-  margin-bottom: 2rem; /* Space between the heading and the search bar */
+  font-size: 4rem;
+  line-height: 1.2;
+  margin-bottom: 2rem;
   animation: subtleScale 1.5s ease-in-out infinite;
 }
 
-/* Define keyframes for subtle scale */
+/* Keyframes for subtle scale */
 @keyframes subtleScale {
   0%, 100% {
-    transform: scale(1); /* Normal size */
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.02); /* Slight scale up */
+    transform: scale(1.02);
   }
 }
-
-
 
 /* Element: app__input */
 .app__input {
@@ -90,11 +149,7 @@ html, body {
   font-family: 'Outfit', sans-serif;
   box-sizing: border-box;
 }
-.app__input::placeholder {
-  color: #f8f8f8; /* Example: light white */
-  opacity: 1;
-}
-/* Element: app__button */
+
 .app__button {
   margin-top: 10px;
   padding: .7rem 1.5rem;
@@ -118,8 +173,8 @@ html, body {
 
 /* Element: app__container */
 .app__container {
-  max-width: 700px; /* Constrain width on larger screens */
-  width: 100%;      /* Full width on smaller screens */
+  max-width: 700px;
+  width: 100%;
   margin: 1.5rem auto;
   padding: 2rem 1rem;
   display: flex;
@@ -127,76 +182,49 @@ html, body {
   justify-content: space-between;
   opacity: 0;
   transition: opacity 0.5s ease;
-  box-sizing: border-box; /* Ensure padding is included in width */
+  box-sizing: border-box;
 }
 
 .app--loaded .app__container {
   opacity: 1;
 }
 
-/* Element: app__top */
-.app__top {
-  margin-bottom: .5rem;
-  padding: .5rem;
-  font-size: 1.2rem;
-}
-
-/* Ensure Temperature in app__temp is bold */
-.app__temp h1 {
-  font-size: 6rem;
-  font-weight: 700; /* Ensure bold for temperature */
-  margin: 0;
-}
-
 /* Element: app__bottom */
 .app__bottom {
   display: flex;
-  justify-content: space-between; /* Keep elements evenly spaced */
+  justify-content: space-between;
   text-align: center;
-  width: 100%; /* Full width */
-  max-width: 700px; /* Constrain the width on larger screens */
+  width: 100%;
+  max-width: 700px;
   padding: 1rem;
   background-color: rgba(255, 255, 255, .2);
   border-radius: 5px;
-  box-sizing: border-box; /* Include padding in width */
-  margin: 0 auto; /* Center content */
-}
-
-/* Labels: Normal weight */
-.app__bottom p {
-  font-weight: 400; 
-  font-size: 1.2rem;
-}
-
-/* Bold class for API data */
-.app__bottom .app__bold {
-  font-weight: 700 !important; /* Force heavier weight for API data */
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .app__image {
-  margin-top: 60px; /* Space between the search bar and the image */
+  margin-top: 40px; /* Add spacing between the search button and the image */
   text-align: center; /* Center the image */
 }
 
-.app__image img {
-  max-width: 100px;  /* Set the size of the image */
-  height: auto;      /* Keep the aspect ratio */
-}
 
-/* Fix for smaller screens */
-
-
-  @media (max-width: 600px) {
-        .app:before {
-          background: url('./assets/Dublin.jpg') no-repeat center/cover;
-        }
-      
-      .app__container {
-        padding: 1rem; /* Reduce container padding */
-      }
-
-      .app__bottom {
-        padding: 0.7rem; /* Adjust padding for small screens */
-        width: 100%; /* Full width on small screens */
-    }
+/* Optimizing for smaller screens */
+@media (max-width: 600px) {
+  .app__container {
+    padding: 1rem;
   }
+
+  .app__bottom {
+    padding: 0.7rem;
+    width: 100%;
+  }
+
+  .navbar {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+
+  .navbar__links {
+    margin-top: 10px; /* Add spacing when stacked */
+  }
+}
