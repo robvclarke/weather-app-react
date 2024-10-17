@@ -70,6 +70,7 @@ html, body {
   display: flex; /* Ensure it displays as a flex container */
   justify-content: space-between; /* Space between the logo and links */
   align-items: center; /* Center items vertically */
+  height: 3rem;
 }
 
 /* Container to space navbar contents */
@@ -149,6 +150,12 @@ html, body {
   font-family: 'Outfit', sans-serif;
   box-sizing: border-box;
 }
+
+.app__input::placeholder {
+  color: #f8f8f8; /* Example: light white */
+  opacity: 1; /* Ensures the placeholder is fully opaque */
+}
+
 
 .app__button {
   margin-top: 10px;
