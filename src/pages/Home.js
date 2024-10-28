@@ -89,13 +89,15 @@ function Home() {
       <div className="app__container">
         <div className="app__top">
           <div className="app__location">
-            <p>{data.name}</p>
+            <h1>{data.name}</h1>
           </div>
           <div className="app__temp">
-            {data.main ? <h1>{Math.round(data.main.temp)}°C</h1> : null}
+            {data.main ? <h2>{Math.round(data.main.temp)}°C</h2> : null}
           </div>
+          {/* Divider line */}
+          <hr className="divider" />
           <div className="app__description">
-            <p className="conditionsLabel">Conditions:</p>
+            <p className="conditionsLabel">Current Conditions:</p>
             {data.weather ? (
               <p className="conditionsResults">
                 {data.weather[0].main} {getWeatherEmoji(data.weather[0].id)}

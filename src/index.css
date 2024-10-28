@@ -160,7 +160,7 @@ html, body {
   cursor: pointer;
   width: 100%;
   max-width: 300px;
-  margin: 10px auto 0;
+  margin: 10px auto 0.5rem;
   display: block;
   font-family: 'Outfit', sans-serif;
   box-sizing: border-box;
@@ -174,8 +174,8 @@ html, body {
 .app__container {
   max-width: 700px;
   width: 100%;
-  margin: 1rem auto 0.25rem auto; /* Adjusted bottom margin to reduce space */
-  padding: 2rem 1rem;
+  margin: .1rem auto 0.25rem auto; /* Adjusted bottom margin to reduce space */
+  padding: 1rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -184,9 +184,40 @@ html, body {
   box-sizing: border-box;
 }
 
+
 .app--loaded .app__container {
   opacity: 1;
 }
+
+.app__location h1 {
+  font-size: 5rem;
+  font-weight: 600;
+  margin-top: 0.5rem; /* Reduced top margin for closer spacing with the button */
+  margin-bottom: 0.5rem; /* Adjust if you need spacing below as well */
+  color: white;
+  text-align: center;
+}
+.app__temp h2 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin: 0;
+  color: white;
+  text-align: center;
+}
+.app__description {
+  text-align: center; /* Center-aligns both label and results */
+}
+
+.conditionsLabel {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.conditionsResults {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
 
 /* app__bottom section */
 .app__bottom {
@@ -286,6 +317,20 @@ html, body {
   font-size: 1rem;
   text-align: center;
 }
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.3); /* Light, subtle line */
+  width: 80%; /* Adjust width as needed */
+  margin: 1rem auto; /* Center and add spacing */
+}
+
+.forecast__card p:nth-child(2) {
+  font-size: 1.5rem; /* Increase size */
+  font-weight: bold; /* Make it bold */
+  color: rgb(255, 255, 255); /* Ensure it's visible */
+}
+
 
 /* Mobile optimization */
 @media (max-width: 600px) {
