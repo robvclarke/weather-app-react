@@ -7,7 +7,7 @@ import windIcon from '../assets/Wind_Icon.svg';
 
 function Home() {
   const [data, setData] = useState({});
-  const [forecastData, setForecastData] = useState([]); // New state for forecast
+  const [forecastData, setForecastData] = useState([]); // State for forecast data
   const [location, setLocation] = useState('');
   const [showHeader, setShowHeader] = useState(true);
 
@@ -18,13 +18,11 @@ function Home() {
   const searchLocation = (event) => {
     event.preventDefault();
     if (location) {
-      // Fetch current weather
       axios.get(currentWeatherUrl).then((response) => {
         setData(response.data);
         setShowHeader(false);
       });
       
-      // Fetch 5-day forecast data
       axios.get(forecastUrl).then((response) => {
         const dailyForecasts = response.data.list.filter((forecast) =>
           forecast.dt_txt.includes("12:00:00")
@@ -87,6 +85,7 @@ function Home() {
         )}
       </div>
 
+      {/* Main container for top and bottom weather info */}
       <div className="app__container">
         <div className="app__top">
           <div className="app__location">
@@ -132,16 +131,21 @@ function Home() {
         )}
       </div>
 
-      {/* New forecast section */}
-      <div className="app__forecast">
-        {forecastData.map((day, index) => (
-          <div key={index} className="forecast__card">
-            <p>{new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' })}</p>
-            <p>{Math.round(day.main.temp)}°C</p>
-            <p>{day.weather[0].main} {getWeatherEmoji(day.weather[0].id)}</p>
+      {/* Five Day Forecast section - only shows if forecastData is loaded */}
+      {forecastData.length > 0 && (
+        <div className="app__forecast-section">
+          <h2 className="forecast__label">Five Day Forecast</h2>
+          <div className="app__forecast">
+            {forecastData.map((day, index) => (
+              <div key={index} className="forecast__card">
+                <p>{new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' })}</p>
+                <p>{Math.round(day.main.temp)}°C</p>
+                <p>{day.weather[0].main} {getWeatherEmoji(day.weather[0].id)}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

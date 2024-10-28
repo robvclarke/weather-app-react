@@ -9,10 +9,9 @@ html, body {
   margin: 0;
   padding: 0;
   font-weight: 400;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
 }
 
-/* Block: app */
 /* Base styles for the app */
 .app {
   width: 100%;
@@ -25,10 +24,10 @@ html, body {
   color: white;
   overflow: hidden;
   transition: all 0.5s ease;
-  padding-top: 40px; /* Ensure content starts below the navbar */
+  padding-top: 40px;
 }
 
-/* Apply the background image and overlay using a pseudo-element */
+/* Background and overlay */
 .app:before {
   content: '';
   background: url('./assets/Dublin.jpg') no-repeat top center/cover;
@@ -37,12 +36,11 @@ html, body {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: -2; /* Ensure it is behind all content */
-  transform: rotate(-2deg) scale(1.1); /* Rotate and scale */
+  z-index: -2;
+  transform: rotate(-2deg) scale(1.1);
   pointer-events: none;
 }
 
-/* Add a separate overlay effect to darken consistently */
 .app:after {
   content: '';
   position: absolute;
@@ -50,29 +48,27 @@ html, body {
   width: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.2); /* Uniform dark overlay */
-  z-index: -1; /* Ensure this is behind the content but above the image */
+  background: rgba(0, 0, 0, 0.2);
+  z-index: -1;
   pointer-events: none;
 }
 
-
 /* Navbar */
 .navbar {
-  width: 100%; /* Full width */
-  background-color: #333; /* Adjust as needed */
+  width: 100%;
+  background-color: #333;
   color: white;
-  padding: 0.05rem 2rem; /* Adjust vertical padding for a smaller height */
+  padding: 0.05rem 2rem;
   box-sizing: border-box;
-  position: fixed; /* Make sure it's fixed at the top */
-  top: 0; /* Stick to the top */
-  left: 0; /* Align to the left edge */
-  z-index: 100; /* Ensure it stays above other elements */
-  display: flex; /* Ensure it displays as a flex container */
-  justify-content: space-between; /* Space between the logo and links */
-  align-items: center; /* Center items vertically */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Container to space navbar contents */
 .navbar__logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -80,13 +76,13 @@ html, body {
 
 .navbar__links {
   list-style: none;
-  display: flex; /* Ensure the items are in a row */
+  display: flex;
   margin: 0;
   padding: 0;
 }
 
 .navbar__links li {
-  margin-left: 1.5rem; /* Space between nav items */
+  margin-left: 1.5rem;
 }
 
 .navbar__links a {
@@ -95,15 +91,14 @@ html, body {
   font-weight: bold;
 }
 
-/* Active Link Style */
 .navbar__links .active {
-  color: #f39c12; /* Highlight color for the active link */
+  color: #f39c12;
   text-decoration: underline;
 }
 
-/* Container for main page content */
+/* Main page content */
 .page-container {
-  padding-top: 80px; /* Ensure content starts below the navbar */
+  padding-top: 80px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -134,7 +129,6 @@ html, body {
   }
 }
 
-/* Element: app__input */
 .app__input {
   padding: .7rem 1.5rem;
   font-size: 1.2rem;
@@ -151,10 +145,9 @@ html, body {
 }
 
 .app__input::placeholder {
-  color: #f8f8f8; /* Example: light white */
-  opacity: 1; /* Ensures the placeholder is fully opaque */
+  color: #f8f8f8;
+  opacity: 1;
 }
-
 
 .app__button {
   margin-top: 10px;
@@ -177,11 +170,11 @@ html, body {
   background-color: rgba(255, 255, 255, .4);
 }
 
-/* Element: app__container */
+/* Main container */
 .app__container {
   max-width: 700px;
   width: 100%;
-  margin: 1.5rem auto;
+  margin: 1rem auto 0.25rem auto; /* Adjusted bottom margin to reduce space */
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -195,27 +188,14 @@ html, body {
   opacity: 1;
 }
 
-/* Specific styles for .app__bottom elements */
-.app__bottom .app__location {
-  font-size: 1.2rem;
-  color: white;
-  font-weight: bold;
-}
-
-.app__bottom .app__temp h1 {
-  font-size: 3rem;
-  font-weight: 700; /* Ensure bold for temperature */
-  margin: 0;
-}
-
-/* Additional styling if needed */
+/* app__bottom section */
 .app__bottom {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap */
+  flex-wrap: wrap;
   justify-content: space-between;
   text-align: center;
-  width: 100%; /* Constrain width to viewport */
-  max-width: 700px; /* Limit max width */
+  width: 100%;
+  max-width: 700px;
   padding: 1rem;
   background-color: rgba(255, 255, 255, .2);
   border-radius: 5px;
@@ -223,49 +203,61 @@ html, body {
   margin: 0 auto;
 }
 
+/* Other styles */
 .app__image {
-  margin-top: 40px; /* Add spacing between the search button and the image */
-  text-align: center; /* Center the image */
+  margin-top: 40px;
+  text-align: center;
 }
 
-/* Define styles for the .app__bold class */
 .app__bold {
-  font-weight: 700; /* Ensure bold font */
-  color: white; /* Ensure text is visible */
+  font-weight: 700;
+  color: white;
   font-size: 2rem;
 }
 
-.conditionsResults{
-  font-weight: 700; /* Ensure bold font */
-  color: white; /* Ensure text is visible */
+.conditionsResults {
+  font-weight: 700;
+  color: white;
   font-size: 2rem;
-}
-.app__feels, .app__humidity, .app__wind {
-  display: flex;
-  align-items: center; /* Center-aligns icon and text vertically */
 }
 
 .app__feels, .app__humidity, .app__wind {
   display: flex;
-  align-items: center; /* Aligns icon and text stack vertically centered */
+  align-items: center;
 }
 
 .icon {
-  width: 50px; /* Adjust size as needed */
+  width: 50px;
   height: 50px;
-  margin-right: 16px; /* Space between icon and text */
+  margin-right: 16px;
 }
 
 .app__text {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .app__label, .app__bold {
-  margin: 0;              /* Remove default margin */
-  padding: 0;             /* Remove default padding */
-  line-height: 1;         /* Set a compact line height */
-  display: inline-block;  /* Minimize font-specific spacing */
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Five Day Forecast section */
+.app__forecast-section {
+  width: 100%;
+  max-width: 700px;
+  margin: 0.25rem auto 1rem auto; /* Adjusted top margin to reduce space */
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.forecast__label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1rem;
 }
 
 .app__forecast {
@@ -284,7 +276,7 @@ html, body {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 5px;
   padding: 1rem;
-  width: 18%; /* Make sure 5 cards fit comfortably */
+  width: 18%;
   box-sizing: border-box;
   color: white;
 }
@@ -295,52 +287,50 @@ html, body {
   text-align: center;
 }
 
-/* Optimizing for smaller screens */
+/* Mobile optimization */
 @media (max-width: 600px) {
-  @media (max-width: 600px) {
-    .app__container {
-      padding: 1rem;
-    }
+  .app__container {
+    padding: 1rem;
+  }
   
-    .app__bottom {
-      padding: 0.7rem;
-      width: 100%;
-      flex-direction: column; /* Stack items vertically */
-    }
+  .app__bottom {
+    padding: 0.7rem;
+    width: 100%;
+    flex-direction: column;
+  }
 
-    .app__forecast {
-      flex-direction: column; /* Stack forecast cards vertically on small screens */
-      align-items: center; 
-    }
-    
-    .forecast__card {
-      width: 80%; /* Make cards take up more space on small screens */
-      margin-bottom: 1rem; /* Add spacing between stacked forecast cards */
-    }
+  .app__forecast {
+    flex-direction: column;
+    align-items: center;
+  }
   
-    .app__feels, .app__humidity, .app__wind {
-      justify-content: flex-start; /* Align items to the start */
-      width: 100%; 
-    }
-  
-    .icon {
-      width: 40px; /* Smaller icon size */
-      height: 40px;
-      margin-right: 24px;
-    }
-  
-    .app__bold, .conditionsResults, .app__label {
-      font-size: 1.5rem; /* Adjust font size for better fit */
-      margin-bottom: 16px;
-    }
+  .forecast__card {
+    width: 80%;
+    margin-bottom: 1rem;
+  }
+
+  .app__feels, .app__humidity, .app__wind {
+    justify-content: flex-start;
+    width: 100%; 
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 24px;
+  }
+
+  .app__bold, .conditionsResults, .app__label {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
   }
 
   .navbar {
-    flex-direction: column; /* Stack items vertically on smaller screens */
-    padding: 1rem; /* Increase padding to ensure enough space for content */
+    flex-direction: column;
+    padding: 1rem;
   }
 
   .navbar__links {
-    margin-top: 10px; /* Add spacing when stacked */
+    margin-top: 10px;
   }
 }
