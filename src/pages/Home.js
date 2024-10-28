@@ -7,25 +7,37 @@ import windIcon from '../assets/Wind_Icon.svg';
 
 function Home() {
   const [data, setData] = useState({});
+  const [forecastData, setForecastData] = useState([]); // New state for forecast
   const [location, setLocation] = useState('');
   const [showHeader, setShowHeader] = useState(true);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=0c52510bae0c2562825677b090d11b6b`;
+  const apiKey = "0c52510bae0c2562825677b090d11b6b";
+  const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`;
 
   const searchLocation = (event) => {
     event.preventDefault();
     if (location) {
-      axios.get(url).then((response) => {
+      // Fetch current weather
+      axios.get(currentWeatherUrl).then((response) => {
         setData(response.data);
         setShowHeader(false);
-        console.log(response.data);
       });
+      
+      // Fetch 5-day forecast data
+      axios.get(forecastUrl).then((response) => {
+        const dailyForecasts = response.data.list.filter((forecast) =>
+          forecast.dt_txt.includes("12:00:00")
+        );
+        setForecastData(dailyForecasts); // Store daily forecasts in state
+      });
+      
       setLocation('');
     }
   };
 
   const getWeatherEmoji = (weatherId) => {
-    switch(true) {
+    switch (true) {
       case (weatherId >= 200 && weatherId < 300):
         return "⛈️";
       case (weatherId >= 300 && weatherId < 400):
@@ -40,7 +52,7 @@ function Home() {
         return "🌞";
       case (weatherId >= 801 && weatherId < 810):
         return "☁️";
-      default: 
+      default:
         return "⁇";
     }
   };
@@ -50,7 +62,7 @@ function Home() {
   return (
     <div className={`app ${isDataLoaded ? 'app--loaded' : ''}`}>
       {showHeader && (
-        <h1 className="app__header">Clarke<br/>Weather<br/>Inc.</h1>
+        <h1 className="app__header">Clarke<br />Weather<br />Inc.</h1>
       )}
 
       <div className="app__search">
@@ -87,37 +99,48 @@ function Home() {
             <p className="conditionsLabel">Conditions:</p>
             {data.weather ? (
               <p className="conditionsResults">
-                 {data.weather[0].main} {getWeatherEmoji(data.weather[0].id)}
+                {data.weather[0].main} {getWeatherEmoji(data.weather[0].id)}
               </p>
             ) : null}
           </div>
         </div>
 
-        {data.name !== undefined && (
-            <div className="app__bottom">
-                <div className="app__feels">
-                    <img src={feelsLikeIcon} alt="Feels like icon" className="icon" />
-                    <div className="app__text">
-                    <p className="app__label">Feels like:</p>
-                    {data.main ? <p className="app__bold">{Math.round(data.main.feels_like)}°C</p> : null}
-                    </div>
-                </div>
-                <div className="app__humidity">
-                    <img src={humidityIcon} alt="Humidity icon" className="icon" />
-                    <div className="app__text">
-                    <p className="app__label">Humidity:</p>
-                    {data.main ? <p className="app__bold">{data.main.humidity}%</p> : null}
-                    </div>
-                </div>
-                <div className="app__wind">
-                    <img src={windIcon} alt="Wind icon" className="icon" />
-                    <div className="app__text">
-                    <p className="app__label">Wind:</p>
-                    {data.wind ? <p className="app__bold">{Math.round(data.wind.speed * 3.6)} km/h</p> : null}
-                    </div>
-                </div>
-             </div>
+        {data.name && (
+          <div className="app__bottom">
+            <div className="app__feels">
+              <img src={feelsLikeIcon} alt="Feels like icon" className="icon" />
+              <div className="app__text">
+                <p className="app__label">Feels like:</p>
+                {data.main ? <p className="app__bold">{Math.round(data.main.feels_like)}°C</p> : null}
+              </div>
+            </div>
+            <div className="app__humidity">
+              <img src={humidityIcon} alt="Humidity icon" className="icon" />
+              <div className="app__text">
+                <p className="app__label">Humidity:</p>
+                {data.main ? <p className="app__bold">{data.main.humidity}%</p> : null}
+              </div>
+            </div>
+            <div className="app__wind">
+              <img src={windIcon} alt="Wind icon" className="icon" />
+              <div className="app__text">
+                <p className="app__label">Wind:</p>
+                {data.wind ? <p className="app__bold">{Math.round(data.wind.speed * 3.6)} km/h</p> : null}
+              </div>
+            </div>
+          </div>
         )}
+      </div>
+
+      {/* New forecast section */}
+      <div className="app__forecast">
+        {forecastData.map((day, index) => (
+          <div key={index} className="forecast__card">
+            <p>{new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' })}</p>
+            <p>{Math.round(day.main.temp)}°C</p>
+            <p>{day.weather[0].main} {getWeatherEmoji(day.weather[0].id)}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

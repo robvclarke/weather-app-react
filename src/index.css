@@ -268,9 +268,32 @@ html, body {
   display: inline-block;  /* Minimize font-specific spacing */
 }
 
+.app__forecast {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
 
+.forecast__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  padding: 1rem;
+  width: 18%; /* Make sure 5 cards fit comfortably */
+  box-sizing: border-box;
+  color: white;
+}
 
-
+.forecast__card p {
+  margin: 0.2rem 0;
+  font-size: 1rem;
+  text-align: center;
+}
 
 /* Optimizing for smaller screens */
 @media (max-width: 600px) {
@@ -283,6 +306,16 @@ html, body {
       padding: 0.7rem;
       width: 100%;
       flex-direction: column; /* Stack items vertically */
+    }
+
+    .app__forecast {
+      flex-direction: column; /* Stack forecast cards vertically on small screens */
+      align-items: center; 
+    }
+    
+    .forecast__card {
+      width: 80%; /* Make cards take up more space on small screens */
+      margin-bottom: 1rem; /* Add spacing between stacked forecast cards */
     }
   
     .app__feels, .app__humidity, .app__wind {
