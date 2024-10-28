@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import weatherIcon from '../assets/Weather_Icon.png';
+import feelsLikeIcon from '../assets/feels_Like.svg';
+import humidityIcon from '../assets/Humidity_Icon.svg';
+import windIcon from '../assets/Wind_Icon.svg';
 
 function Home() {
   const [data, setData] = useState({});
@@ -91,20 +94,29 @@ function Home() {
         </div>
 
         {data.name !== undefined && (
-          <div className="app__bottom">
-            <div className="app__feels">
-              <p>Feels like:</p>
-              {data.main ? <p className="app__bold">{Math.round(data.main.feels_like)}°C</p> : null}
-            </div>
-            <div className="app__humidity">
-              <p>Humidity:</p>
-              {data.main ? <p className="app__bold">{data.main.humidity}%</p> : null}
-            </div>
-            <div className="app__wind">
-              <p>Wind:</p>
-              {data.wind ? <p className="app__bold">{Math.round(data.wind.speed * 3.6)} km/h</p> : null}
-            </div>
-          </div>
+            <div className="app__bottom">
+                <div className="app__feels">
+                    <img src={feelsLikeIcon} alt="Feels like icon" className="icon" />
+                    <div className="app__text">
+                    <p className="app__label">Feels like:</p>
+                    {data.main ? <p className="app__bold">{Math.round(data.main.feels_like)}°C</p> : null}
+                    </div>
+                </div>
+                <div className="app__humidity">
+                    <img src={humidityIcon} alt="Humidity icon" className="icon" />
+                    <div className="app__text">
+                    <p className="app__label">Humidity:</p>
+                    {data.main ? <p className="app__bold">{data.main.humidity}%</p> : null}
+                    </div>
+                </div>
+                <div className="app__wind">
+                    <img src={windIcon} alt="Wind icon" className="icon" />
+                    <div className="app__text">
+                    <p className="app__label">Wind:</p>
+                    {data.wind ? <p className="app__bold">{Math.round(data.wind.speed * 3.6)} km/h</p> : null}
+                    </div>
+                </div>
+             </div>
         )}
       </div>
     </div>

@@ -61,7 +61,7 @@ html, body {
   width: 100%; /* Full width */
   background-color: #333; /* Adjust as needed */
   color: white;
-  padding: 1rem 2rem; /* Add horizontal padding */
+  padding: 0.05rem 2rem; /* Adjust vertical padding for a smaller height */
   box-sizing: border-box;
   position: fixed; /* Make sure it's fixed at the top */
   top: 0; /* Stick to the top */
@@ -70,7 +70,6 @@ html, body {
   display: flex; /* Ensure it displays as a flex container */
   justify-content: space-between; /* Space between the logo and links */
   align-items: center; /* Center items vertically */
-  height: 3rem;
 }
 
 /* Container to space navbar contents */
@@ -196,13 +195,27 @@ html, body {
   opacity: 1;
 }
 
-/* Element: app__bottom */
+/* Specific styles for .app__bottom elements */
+.app__bottom .app__location {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.app__bottom .app__temp h1 {
+  font-size: 3rem;
+  font-weight: 700; /* Ensure bold for temperature */
+  margin: 0;
+}
+
+/* Additional styling if needed */
 .app__bottom {
   display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
   justify-content: space-between;
   text-align: center;
-  width: 100%;
-  max-width: 700px;
+  width: 100%; /* Constrain width to viewport */
+  max-width: 700px; /* Limit max width */
   padding: 1rem;
   background-color: rgba(255, 255, 255, .2);
   border-radius: 5px;
@@ -215,20 +228,83 @@ html, body {
   text-align: center; /* Center the image */
 }
 
+/* Define styles for the .app__bold class */
+.app__bold {
+  font-weight: 700; /* Ensure bold font */
+  color: white; /* Ensure text is visible */
+  font-size: 2rem;
+}
+
+.conditionsResults{
+  font-weight: 700; /* Ensure bold font */
+  color: white; /* Ensure text is visible */
+  font-size: 2rem;
+}
+.app__feels, .app__humidity, .app__wind {
+  display: flex;
+  align-items: center; /* Center-aligns icon and text vertically */
+}
+
+.app__feels, .app__humidity, .app__wind {
+  display: flex;
+  align-items: center; /* Aligns icon and text stack vertically centered */
+}
+
+.icon {
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  margin-right: 16px; /* Space between icon and text */
+}
+
+.app__text {
+  display: flex;
+  flex-direction: column; 
+}
+
+.app__label, .app__bold {
+  margin: 0;              /* Remove default margin */
+  padding: 0;             /* Remove default padding */
+  line-height: 1;         /* Set a compact line height */
+  display: inline-block;  /* Minimize font-specific spacing */
+}
+
+
+
+
 
 /* Optimizing for smaller screens */
 @media (max-width: 600px) {
-  .app__container {
-    padding: 1rem;
-  }
-
-  .app__bottom {
-    padding: 0.7rem;
-    width: 100%;
+  @media (max-width: 600px) {
+    .app__container {
+      padding: 1rem;
+    }
+  
+    .app__bottom {
+      padding: 0.7rem;
+      width: 100%;
+      flex-direction: column; /* Stack items vertically */
+    }
+  
+    .app__feels, .app__humidity, .app__wind {
+      justify-content: flex-start; /* Align items to the start */
+      width: 100%; 
+    }
+  
+    .icon {
+      width: 40px; /* Smaller icon size */
+      height: 40px;
+      margin-right: 24px;
+    }
+  
+    .app__bold, .conditionsResults, .app__label {
+      font-size: 1.5rem; /* Adjust font size for better fit */
+      margin-bottom: 16px;
+    }
   }
 
   .navbar {
     flex-direction: column; /* Stack items vertically on smaller screens */
+    padding: 1rem; /* Increase padding to ensure enough space for content */
   }
 
   .navbar__links {
