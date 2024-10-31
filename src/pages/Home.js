@@ -7,29 +7,41 @@ import windIcon from '../assets/Wind_Icon.svg';
 
 function Home() {
   const [data, setData] = useState({});
-  const [forecastData, setForecastData] = useState([]); // State for forecast data
+  const [forecastData, setForecastData] = useState([]);
   const [location, setLocation] = useState('');
   const [showHeader, setShowHeader] = useState(true);
+  const [backgroundImage, setBackgroundImage] = useState(null);
 
   const apiKey = "0c52510bae0c2562825677b090d11b6b";
+  const unsplashKey = "PGJKpfliiakxMxS97n55E2Ke2BAgBFW4S-Cx_BCZuxw";
   const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
   const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`;
 
-  const searchLocation = (event) => {
+  const searchLocation = async (event) => {
     event.preventDefault();
     if (location) {
-      axios.get(currentWeatherUrl).then((response) => {
-        setData(response.data);
+      try {
+        const weatherResponse = await axios.get(currentWeatherUrl);
+        setData(weatherResponse.data);
         setShowHeader(false);
-      });
-      
-      axios.get(forecastUrl).then((response) => {
-        const dailyForecasts = response.data.list.filter((forecast) =>
+
+        const forecastResponse = await axios.get(forecastUrl);
+        const dailyForecasts = forecastResponse.data.list.filter((forecast) =>
           forecast.dt_txt.includes("12:00:00")
         );
-        setForecastData(dailyForecasts); // Store daily forecasts in state
-      });
-      
+        setForecastData(dailyForecasts);
+
+        const unsplashResponse = await axios.get(
+          `https://api.unsplash.com/search/photos?query=${location}&client_id=${unsplashKey}`
+        );
+        const imageUrl = unsplashResponse.data.results[0]?.urls?.regular;
+        setBackgroundImage(imageUrl || null);
+        
+      } catch (error) {
+        console.error("Error fetching data", error);
+        setBackgroundImage(null);
+      }
+
       setLocation('');
     }
   };
@@ -58,7 +70,17 @@ function Home() {
   const isDataLoaded = data.name !== undefined;
 
   return (
-    <div className={`app ${isDataLoaded ? 'app--loaded' : ''}`}>
+    <div
+      className={`app ${isDataLoaded ? 'app--loaded' : ''}`}
+      style={{
+        backgroundImage: backgroundImage
+          ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
+          : `linear-gradient(120deg, #14ADFE, #136EF3)`,
+        backgroundSize: backgroundImage ? "cover, cover" : "100% 100%",
+        backgroundPosition: "center, center",
+        backgroundRepeat: "no-repeat, no-repeat"
+      }}
+    >
       {showHeader && (
         <h1 className="app__header">Clarke<br />Weather<br />Inc.</h1>
       )}
@@ -77,15 +99,11 @@ function Home() {
 
         {showHeader && (
           <div className="app__image">
-            <img
-              src={weatherIcon}
-              alt="decorative weather icon"
-            />
+            <img src={weatherIcon} alt="decorative weather icon" />
           </div>
         )}
       </div>
 
-      {/* Main container for top and bottom weather info */}
       <div className="app__container">
         <div className="app__top">
           <div className="app__location">
@@ -94,7 +112,6 @@ function Home() {
           <div className="app__temp">
             {data.main ? <h2>{Math.round(data.main.temp)}°C</h2> : null}
           </div>
-          {/* Divider line */}
           <hr className="divider" />
           <div className="app__description">
             <p className="conditionsLabel">Current Conditions:</p>
@@ -133,7 +150,6 @@ function Home() {
         )}
       </div>
 
-      {/* Five Day Forecast section - only shows if forecastData is loaded */}
       {forecastData.length > 0 && (
         <div className="app__forecast-section">
           <h2 className="forecast__label">Five Day Forecast</h2>

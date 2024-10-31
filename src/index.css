@@ -23,34 +23,55 @@ html, body {
   align-items: center;
   color: white;
   overflow: hidden;
-  transition: all 0.5s ease;
   padding-top: 40px;
 }
 
-/* Background and overlay */
-.app:before {
+/* Background gradient applied with ::before */
+.app::before {
   content: '';
-  background: url('./assets/Dublin.jpg') no-repeat top center/cover;
   position: absolute;
-  height: 100%;
-  width: 100%;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #14ADFE, #136EF3);
+  background-size: 200% 200%;
+  animation: gradientMove 15s ease infinite;
   z-index: -2;
-  transform: rotate(-2deg) scale(1.1);
-  pointer-events: none;
 }
 
-.app:after {
+/* Overlay only active if Unsplash image is loaded */
+.app.app--with-overlay::after {
   content: '';
   position: absolute;
-  height: 100%;
-  width: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay for Unsplash images */
   z-index: -1;
-  pointer-events: none;
+}
+
+/* Keyframes for smooth, subtle gradient movement */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Content wrapper to place UI elements above the overlay */
+.app__content {
+  position: relative;
+  z-index: 2; /* Ensures it appears above the overlay */
+  width: 100%;
+  max-width: 700px;
+  padding: 1rem;
 }
 
 /* Navbar */
@@ -174,7 +195,7 @@ html, body {
 .app__container {
   max-width: 700px;
   width: 100%;
-  margin: .1rem auto 0.25rem auto; /* Adjusted bottom margin to reduce space */
+  margin: .1rem auto 0.25rem auto;
   padding: 1rem 1rem;
   display: flex;
   flex-direction: column;
@@ -184,7 +205,6 @@ html, body {
   box-sizing: border-box;
 }
 
-
 .app--loaded .app__container {
   opacity: 1;
 }
@@ -192,11 +212,12 @@ html, body {
 .app__location h1 {
   font-size: 5rem;
   font-weight: 600;
-  margin-top: 0.5rem; /* Reduced top margin for closer spacing with the button */
-  margin-bottom: 0.5rem; /* Adjust if you need spacing below as well */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   color: white;
   text-align: center;
 }
+
 .app__temp h2 {
   font-size: 2.5rem;
   font-weight: 500;
@@ -204,8 +225,9 @@ html, body {
   color: white;
   text-align: center;
 }
+
 .app__description {
-  text-align: center; /* Center-aligns both label and results */
+  text-align: center;
 }
 
 .conditionsLabel {
@@ -218,8 +240,6 @@ html, body {
   margin-top: 0;
 }
 
-
-/* app__bottom section */
 .app__bottom {
   display: flex;
   flex-wrap: wrap;
@@ -234,7 +254,6 @@ html, body {
   margin: 0 auto;
 }
 
-/* Other styles */
 .app__image {
   margin-top: 40px;
   text-align: center;
@@ -279,7 +298,7 @@ html, body {
 .app__forecast-section {
   width: 100%;
   max-width: 700px;
-  margin: 0.25rem auto 1rem auto; /* Adjusted top margin to reduce space */
+  margin: 0.25rem auto 1rem auto;
   text-align: center;
   padding: 0 1rem;
 }
@@ -320,24 +339,23 @@ html, body {
 
 .divider {
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.3); /* Light, subtle line */
-  width: 80%; /* Adjust width as needed */
-  margin: 1rem auto; /* Center and add spacing */
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  width: 80%;
+  margin: 1rem auto;
 }
 
 .forecast__card p:nth-child(2) {
-  font-size: 1.5rem; /* Increase size */
-  font-weight: bold; /* Make it bold */
-  color: rgb(255, 255, 255); /* Ensure it's visible */
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
 }
-
 
 /* Mobile optimization */
 @media (max-width: 600px) {
   .app__container {
     padding: 1rem;
   }
-  
+
   .app__bottom {
     padding: 0.7rem;
     width: 100%;
@@ -348,7 +366,7 @@ html, body {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .forecast__card {
     width: 80%;
     margin-bottom: 1rem;
@@ -356,7 +374,7 @@ html, body {
 
   .app__feels, .app__humidity, .app__wind {
     justify-content: flex-start;
-    width: 100%; 
+    width: 100%;
   }
 
   .icon {
