@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import weatherIcon from '../assets/Weather_Icon.png';
 import feelsLikeIcon from '../assets/feels_Like.svg';
@@ -11,40 +11,93 @@ function Home() {
   const [location, setLocation] = useState('');
   const [showHeader, setShowHeader] = useState(true);
   const [backgroundImage, setBackgroundImage] = useState(null);
+  const [locationAllowed, setLocationAllowed] = useState(false);
+  const [showLocationPrompt, setShowLocationPrompt] = useState(true);
 
   const apiKey = "0c52510bae0c2562825677b090d11b6b";
   const unsplashKey = "PGJKpfliiakxMxS97n55E2Ke2BAgBFW4S-Cx_BCZuxw";
-  const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
-  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`;
 
-  const searchLocation = async (event) => {
-    event.preventDefault();
-    if (location) {
-      try {
-        const weatherResponse = await axios.get(currentWeatherUrl);
-        setData(weatherResponse.data);
-        setShowHeader(false);
-
-        const forecastResponse = await axios.get(forecastUrl);
-        const dailyForecasts = forecastResponse.data.list.filter((forecast) =>
-          forecast.dt_txt.includes("12:00:00")
-        );
-        setForecastData(dailyForecasts);
-
-        const unsplashResponse = await axios.get(
-          `https://api.unsplash.com/search/photos?query=${location}&client_id=${unsplashKey}`
-        );
-        const imageUrl = unsplashResponse.data.results[0]?.urls?.regular;
-        setBackgroundImage(imageUrl || null);
-        
-      } catch (error) {
-        console.error("Error fetching data", error);
-        setBackgroundImage(null);
-      }
-
-      setLocation('');
+  const fetchWeatherByCity = async (city) => {
+    try {
+      const weatherResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+      );
+      setData(weatherResponse.data);
+      setLocation(city);
+      fetchForecast(city);
+      fetchBackgroundImage(city);
+      setShowHeader(false); 
+    } catch (error) {
+      console.error("Error fetching weather data", error);
     }
   };
+
+  const fetchWeatherByCoordinates = async (lat, lon) => {
+    try {
+      const weatherResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
+      );
+      const city = weatherResponse.data.name;
+      setData(weatherResponse.data);
+      setLocation(city);
+      fetchForecast(city);
+      fetchBackgroundImage(city);
+      setShowHeader(false); 
+      setLocationAllowed(true);
+    } catch (error) {
+      console.error("Error fetching weather data", error);
+      setLocationAllowed(false);
+    }
+  };
+
+  const fetchForecast = async (city) => {
+    try {
+      const forecastResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`
+      );
+      const dailyForecasts = forecastResponse.data.list.filter((forecast) =>
+        forecast.dt_txt.includes("12:00:00")
+      );
+      setForecastData(dailyForecasts);
+    } catch (error) {
+      console.error("Error fetching forecast data", error);
+    }
+  };
+
+  const fetchBackgroundImage = async (city) => {
+    try {
+      const unsplashResponse = await axios.get(
+        `https://api.unsplash.com/search/photos?query=${city}&client_id=${unsplashKey}`
+      );
+      const imageUrl = unsplashResponse.data.results[0]?.urls?.regular;
+      setBackgroundImage(imageUrl || null);
+    } catch (error) {
+      console.error("Error fetching background image", error);
+      setBackgroundImage(null);
+    }
+  };
+
+  const requestUserLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        fetchWeatherByCoordinates(latitude, longitude);
+        setShowLocationPrompt(false); 
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        setLocationAllowed(false);
+        setShowLocationPrompt(false);
+      },
+      { enableHighAccuracy: true }
+    );
+  };
+
+  useEffect(() => {
+    if (showLocationPrompt) {
+      setLocationAllowed(false);
+    }
+  }, [showLocationPrompt]);
 
   const getWeatherEmoji = (weatherId) => {
     switch (true) {
@@ -76,32 +129,42 @@ function Home() {
         backgroundImage: backgroundImage
           ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
           : `linear-gradient(120deg, #14ADFE, #136EF3)`,
-        backgroundSize: backgroundImage ? "cover, cover" : "100% 100%",
-        backgroundPosition: "center, center",
-        backgroundRepeat: "no-repeat, no-repeat"
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
-      {showHeader && (
+      {showHeader && !locationAllowed && (
         <h1 className="app__header">Clarke<br />Weather<br />Inc.</h1>
       )}
 
+      {showLocationPrompt && (
+        <div className="location-prompt">
+          <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
+          <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
+          <button className="secondary-button" onClick={() => setShowLocationPrompt(false)}>No, Thanks</button>
+        </div>
+      )}
+
       <div className="app__search">
-        <form className="app__form" onSubmit={searchLocation}>
+        <form
+          className="app__form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (location) fetchWeatherByCity(location);
+          }}
+        >
           <input
             className="app__input"
             value={location}
-            onChange={(event) => setLocation(event.target.value)}
+            onChange={(e) => setLocation(e.target.value)}
             placeholder="Enter Location"
             type="text"
           />
-          <button className="app__button" type="submit">Search</button>
+          <button className="app__button" type="submit">
+            Search
+          </button>
         </form>
-
-        {showHeader && (
-          <div className="app__image">
-            <img src={weatherIcon} alt="decorative weather icon" />
-          </div>
-        )}
       </div>
 
       <div className="app__container">

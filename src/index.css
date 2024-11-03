@@ -16,15 +16,16 @@ html, body {
 .app {
   width: 100%;
   min-height: 100vh;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
-  overflow: hidden;
   padding-top: 40px;
+  position: relative; /* Ensure it’s positioned for proper layering */
+  overflow: hidden;  /* Ensures content doesn't extend outside view */
 }
+
 
 /* Background gradient applied with ::before */
 .app::before {
@@ -74,7 +75,7 @@ html, body {
   padding: 1rem;
 }
 
-/* Navbar */
+/* Navbar Styling */
 .navbar {
   width: 100%;
   background-color: #333;
@@ -88,6 +89,7 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: none; /* Remove any border added for transparency */
 }
 
 .navbar__logo-wrapper {
@@ -96,9 +98,9 @@ html, body {
 }
 
 .navbar__logo-image {
-  width: 50px; /* Adjust as needed */
+  width: 50px;
   height: auto;
-  margin-right: 1rem; /* Space between logo image and text */
+  margin-right: 1rem;
 }
 
 .navbar__logo-text {
@@ -128,6 +130,7 @@ html, body {
   color: #FFDA61;
   text-decoration: underline;
 }
+
 
 
 /* Main page content */
@@ -277,6 +280,60 @@ html, body {
   color: white;
   font-size: 2rem;
 }
+
+/* Location prompt styling */
+.location-prompt {
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+  margin: 1rem auto 2rem;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 2;
+}
+
+.location-prompt p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}
+
+.location-prompt .primary-button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 1rem;
+  color: #333;
+  background: #FFDA61;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.location-prompt .primary-button:hover {
+  background: #FFD033;
+  color: #111;
+}
+
+/* Secondary outline style for "No, Thanks" button */
+.location-prompt .secondary-button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 1rem;
+  color: #FFDA61;
+  background: transparent;
+  border: 2px solid #FFDA61;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.location-prompt .secondary-button:hover {
+  background: rgba(255, 218, 97, 0.2); /* Light overlay on hover */
+}
+
 
 .conditionsResults {
   font-weight: 700;
