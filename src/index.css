@@ -90,9 +90,21 @@ html, body {
   align-items: center;
 }
 
-.navbar__logo {
+.navbar__logo-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo-image {
+  width: 50px; /* Adjust as needed */
+  height: auto;
+  margin-right: 1rem; /* Space between logo image and text */
+}
+
+.navbar__logo-text {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #ffffff;
 }
 
 .navbar__links {
@@ -113,9 +125,10 @@ html, body {
 }
 
 .navbar__links .active {
-  color: #f39c12;
+  color: #FFDA61;
   text-decoration: underline;
 }
+
 
 /* Main page content */
 .page-container {
