@@ -140,7 +140,7 @@ function Home() {
 
       {showLocationPrompt && (
         <div className="location-prompt">
-          <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
+          <p>Would you like to grant <strong>'Clarke Weather Inc'</strong> location access to see the weather in your area?</p>
           <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
           <button className="secondary-button" onClick={() => setShowLocationPrompt(false)}>No, Thanks</button>
         </div>
