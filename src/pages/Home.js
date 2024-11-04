@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import weatherIcon from '../assets/Weather_Icon.png';
 import feelsLikeIcon from '../assets/feels_Like.svg';
 import humidityIcon from '../assets/Humidity_Icon.svg';
 import windIcon from '../assets/Wind_Icon.svg';
-import locationIcon from '../assets/location_icon.svg'; // Import the location icon
+import locationIcon from '../assets/location_icon.svg';
+import { useForm } from "react-hook-form";
 
 function Home() {
   const [data, setData] = useState({});
@@ -15,12 +15,16 @@ function Home() {
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [showLocationPrompt, setShowLocationPrompt] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const apiKey = "0c52510bae0c2562825677b090d11b6b";
   const unsplashKey = "PGJKpfliiakxMxS97n55E2Ke2BAgBFW4S-Cx_BCZuxw";
 
   const fetchWeatherByCity = async (city) => {
     setIsLoading(true);
+    setErrorMessage(null);
     try {
       const weatherResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
@@ -32,6 +36,7 @@ function Home() {
       setShowHeader(false);
     } catch (error) {
       console.error("Error fetching weather data", error);
+      setErrorMessage("Could not find the specified city. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -86,7 +91,7 @@ function Home() {
   };
 
   const requestUserLocation = () => {
-    setIsLoading(true); // Set loading state immediately after clicking the button
+    setIsLoading(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -97,7 +102,7 @@ function Home() {
         console.error("Geolocation error:", error);
         setLocationAllowed(false);
         setShowLocationPrompt(false);
-        setIsLoading(false); // Stop loading state if an error occurs
+        setIsLoading(false);
       },
       { enableHighAccuracy: true }
     );
@@ -135,7 +140,7 @@ function Home() {
       className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
       style={{
         backgroundImage:
-          backgroundImage && (isLoading || !showHeader) // Show the previous background while loading or when data is loaded
+          backgroundImage && (isLoading || !showHeader)
             ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
             : `linear-gradient(120deg, #14ADFE, #136EF3)`,
         backgroundSize: "cover",
@@ -159,11 +164,7 @@ function Home() {
           {showLocationPrompt && (
             <div className="location-prompt">
               <div className="location-prompt__header">
-                <img
-                  src={locationIcon}
-                  alt="Location Icon"
-                  className="location-icon"
-                />
+                <img src={locationIcon} alt="Location icon" className="location-icon" />
                 <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
               </div>
               <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
@@ -174,18 +175,20 @@ function Home() {
           <div className="app__search">
             <form
               className="app__form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (location) fetchWeatherByCity(location);
-              }}
+              onSubmit={handleSubmit((data) => {
+                if (data.location) fetchWeatherByCity(data.location);
+              })}
             >
               <input
                 className="app__input"
+                {...register("location", { required: "Please enter a location." })}
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="Enter Location"
                 type="text"
               />
+              {errors.location && <p className="error-message">{errors.location.message}</p>}
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
               <button className="app__button" type="submit">
                 Search
               </button>
