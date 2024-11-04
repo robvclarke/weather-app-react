@@ -9,8 +9,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-weight: 400;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  overflow-y: hidden; /* Prevent scrolling up, but allow downwards scroll */
+  overflow-x: hidden;
 }
 
 /* Base styles for the app */
@@ -22,37 +21,36 @@ html, body {
   justify-content: center;
   align-items: center;
   color: white;
-  padding-top: 100px; /* Increase padding to make sure content starts below the navbar */
-  position: relative;
-  overflow-y: auto; /* Allow scrolling down to see content below */
+  padding-top: 40px;
+  position: relative; /* Ensure it’s positioned for proper layering */
+  overflow: hidden;  /* Ensures content doesn't extend outside view */
 }
+
 
 /* Background gradient applied with ::before */
 .app::before {
   content: '';
-  position: fixed; /* Covers entire viewport, including behind navbar */
+  position: absolute;
   top: 0;
   left: 0;
-  width: 120%; /* Make background larger to prevent gaps */
-  height: 120%; /* Extend height to cover beyond the normal bounds */
+  width: 100%;
+  height: 100%;
   background: linear-gradient(120deg, #14ADFE, #136EF3);
-  background-size: cover; /* Scale up to ensure entire area is covered */
-  background-attachment: fixed; /* Locks the background in place during scrolling */
-  background-position: center; /* Keeps background centered for consistent appearance */
+  background-size: 200% 200%;
   animation: gradientMove 15s ease infinite;
-  z-index: -2; /* Keep behind all content */
+  z-index: -2;
 }
 
 /* Overlay only active if Unsplash image is loaded */
-.app--loaded::after {
+.app.app--with-overlay::after {
   content: '';
-  position: fixed; /* Ensure full coverage */
+  position: absolute;
   top: 0;
   left: 0;
-  width: 120%; /* Cover beyond the normal bounds */
-  height: 120%; /* Ensure no gaps appear when scrolling */
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.5); /* Dark overlay for Unsplash images */
-  z-index: -1; /* Layer above the gradient but behind the main content */
+  z-index: -1;
 }
 
 /* Keyframes for smooth, subtle gradient movement */
@@ -68,73 +66,77 @@ html, body {
   }
 }
 
+/* Content wrapper to place UI elements above the overlay */
+.app__content {
+  position: relative;
+  z-index: 2; /* Ensures it appears above the overlay */
+  width: 100%;
+  max-width: 700px;
+  padding: 1rem;
+}
+
 /* Navbar Styling */
 .navbar {
   width: 100%;
-  background: transparent; /* Transparent to let background show through */
+  background-color: #333;
   color: white;
-  padding: 0.5rem 2rem; /* Adjusted padding for better spacing */
+  padding: 0.05rem 2rem;
   box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10; /* Ensure it's above the background */
+  z-index: 100;
   display: flex;
-  justify-content: space-between; /* Space between logo and links */
+  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid white; /* White line beneath the navbar */
+  border-bottom: none; /* Remove any border added for transparency */
 }
 
-/* Logo and text wrapper */
 .navbar__logo-wrapper {
   display: flex;
   align-items: center;
 }
 
-/* Logo image */
 .navbar__logo-image {
   width: 50px;
   height: auto;
   margin-right: 1rem;
 }
 
-/* Logo text */
 .navbar__logo-text {
   font-size: 1.5rem;
   font-weight: bold;
   color: #ffffff;
 }
 
-/* Navbar links styling */
 .navbar__links {
   list-style: none;
   display: flex;
   margin: 0;
   padding: 0;
-  margin-left: auto; /* Pushes links to the right */
+  margin-left: auto;
 }
 
-/* Each link item in the navbar */
 .navbar__links li {
   margin-left: 1.5rem;
 }
 
-/* Styling for individual links */
 .navbar__links a {
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
-/* Active link styling */
 .navbar__links .active {
   color: #FFDA61;
   text-decoration: underline;
 }
 
+
+
 /* Main page content */
 .page-container {
-  padding-top: 100px; /* Ensures content starts below the fixed navbar */
+  padding-top: 80px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -142,13 +144,7 @@ html, body {
 /* Search bar and button */
 .app__search {
   text-align: center;
-  padding: 1.5rem 1rem; /* Reduced padding to match the space above */
-  margin-top: 20px; /* Ensures proper spacing beneath the navbar */
-}
-
-/* Increase margin between navbar and search field when API data loads in */
-.app--loaded .app__search {
-  margin-top: 30px !important; /* Force increase of margin after data loads to create more space from navbar */
+  padding: 1rem;
 }
 
 .app__header {
@@ -238,6 +234,7 @@ html, body {
   100% { transform: rotate(360deg); }
 }
 
+
 /* Main container */
 .app__container {
   max-width: 700px;
@@ -317,7 +314,7 @@ html, body {
   position: relative;
   width: 80%;
   max-width: 500px;
-  margin: 1rem auto 1rem;
+  margin: 1rem auto 2rem;
   padding: 20px;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
@@ -364,6 +361,7 @@ html, body {
 .location-prompt .secondary-button:hover {
   background: rgba(255, 218, 97, 0.2); /* Light overlay on hover */
 }
+
 
 .conditionsResults {
   font-weight: 700;

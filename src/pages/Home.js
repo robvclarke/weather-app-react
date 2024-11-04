@@ -130,17 +130,18 @@ function Home() {
   };
 
   return (
-    <div
-      className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
-      style={{
-        backgroundImage: backgroundImage && !isLoading
-          ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
-          : `linear-gradient(120deg, #14ADFE, #136EF3)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
-      }}
-    >
+            <div
+        className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
+        style={{
+            backgroundImage:
+            backgroundImage && (isLoading || !showHeader) // Show the previous background while loading or when data is loaded
+                ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
+                : `linear-gradient(120deg, #14ADFE, #136EF3)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+        }}
+        >
       {isLoading && (
         <div className="loading loading--central">
           <p>Loading weather data...</p>
