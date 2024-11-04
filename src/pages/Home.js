@@ -4,6 +4,7 @@ import weatherIcon from '../assets/Weather_Icon.png';
 import feelsLikeIcon from '../assets/feels_Like.svg';
 import humidityIcon from '../assets/Humidity_Icon.svg';
 import windIcon from '../assets/Wind_Icon.svg';
+import locationIcon from '../assets/location_icon.svg'; // Import the location icon
 
 function Home() {
   const [data, setData] = useState({});
@@ -130,18 +131,18 @@ function Home() {
   };
 
   return (
-            <div
-        className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
-        style={{
-            backgroundImage:
-            backgroundImage && (isLoading || !showHeader) // Show the previous background while loading or when data is loaded
-                ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
-                : `linear-gradient(120deg, #14ADFE, #136EF3)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-        }}
-        >
+    <div
+      className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
+      style={{
+        backgroundImage:
+          backgroundImage && (isLoading || !showHeader) // Show the previous background while loading or when data is loaded
+            ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
+            : `linear-gradient(120deg, #14ADFE, #136EF3)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {isLoading && (
         <div className="loading loading--central">
           <p>Loading weather data...</p>
@@ -157,7 +158,14 @@ function Home() {
 
           {showLocationPrompt && (
             <div className="location-prompt">
-              <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
+              <div className="location-prompt__header">
+                <img
+                  src={locationIcon}
+                  alt="Location Icon"
+                  className="location-icon"
+                />
+                <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
+              </div>
               <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
               <button className="secondary-button" onClick={() => setShowLocationPrompt(false)}>No, Thanks</button>
             </div>

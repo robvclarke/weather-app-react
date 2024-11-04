@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 
 /* Apply Outfit font globally */
 html, body {
@@ -21,7 +23,7 @@ html, body {
   justify-content: center;
   align-items: center;
   color: white;
-  padding-top: 40px;
+  padding-top: 20px;
   position: relative; /* Ensure it’s positioned for proper layering */
   overflow: hidden;  /* Ensures content doesn't extend outside view */
 }
@@ -78,8 +80,8 @@ html, body {
 /* Navbar Styling */
 .navbar {
   width: 100%;
-  background-color: #333;
-  color: white;
+  background: linear-gradient(120deg, #ffffff, #ecf3ff);
+  color: rgb(0, 0, 0);
   padding: 0.05rem 2rem;
   box-sizing: border-box;
   position: fixed;
@@ -89,7 +91,7 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: none; /* Remove any border added for transparency */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .navbar__logo-wrapper {
@@ -104,9 +106,10 @@ html, body {
 }
 
 .navbar__logo-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #494949;
 }
 
 .navbar__links {
@@ -122,17 +125,16 @@ html, body {
 }
 
 .navbar__links a {
-  color: white;
+  font-family: 'Poppins', sans-serif;
+  color: #494949;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .navbar__links .active {
-  color: #FFDA61;
+  color: #14ADFE;
   text-decoration: underline;
 }
-
-
 
 /* Main page content */
 .page-container {
@@ -323,11 +325,27 @@ html, body {
   z-index: 2;
 }
 
+/* Header for location prompt with icon and text */
+.location-prompt__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Location icon styling */
+.location-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+}
+
 .location-prompt p {
-  margin: 0 0 1rem;
+  margin: 0;
   font-size: 1rem;
 }
 
+/* Button styles remain unchanged */
 .location-prompt .primary-button {
   padding: 10px 20px;
   margin: 0 5px;
@@ -361,6 +379,7 @@ html, body {
 .location-prompt .secondary-button:hover {
   background: rgba(255, 218, 97, 0.2); /* Light overlay on hover */
 }
+
 
 
 .conditionsResults {
