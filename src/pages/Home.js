@@ -85,6 +85,7 @@ function Home() {
   };
 
   const requestUserLocation = () => {
+    setIsLoading(true); // Set loading state immediately after clicking the button
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -95,6 +96,7 @@ function Home() {
         console.error("Geolocation error:", error);
         setLocationAllowed(false);
         setShowLocationPrompt(false);
+        setIsLoading(false); // Stop loading state if an error occurs
       },
       { enableHighAccuracy: true }
     );
@@ -127,13 +129,11 @@ function Home() {
     }
   };
 
-  const isDataLoaded = data.name !== undefined;
-
   return (
     <div
-      className={`app ${isDataLoaded ? 'app--loaded' : ''}`}
+      className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
       style={{
-        backgroundImage: backgroundImage
+        backgroundImage: backgroundImage && !isLoading
           ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
           : `linear-gradient(120deg, #14ADFE, #136EF3)`,
         backgroundSize: "cover",
@@ -141,105 +141,109 @@ function Home() {
         backgroundRepeat: "no-repeat"
       }}
     >
-      {showHeader && (
-        <h1 className="app__header">Clarke<br />Weather<br />Inc.</h1>
-      )}
-
-      {showLocationPrompt && (
-        <div className="location-prompt">
-          <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
-          <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
-          <button className="secondary-button" onClick={() => setShowLocationPrompt(false)}>No, Thanks</button>
-        </div>
-      )}
-
       {isLoading && (
-        <div className="loading">
+        <div className="loading loading--central">
           <p>Loading weather data...</p>
           <div className="spinner"></div>
         </div>
       )}
 
-      <div className="app__search">
-        <form
-          className="app__form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (location) fetchWeatherByCity(location);
-          }}
-        >
-          <input
-            className="app__input"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter Location"
-            type="text"
-          />
-          <button className="app__button" type="submit">
-            Search
-          </button>
-        </form>
-      </div>
+      {!isLoading && (
+        <>
+          {showHeader && (
+            <h1 className="app__header">Clarke<br />Weather<br />Inc.</h1>
+          )}
 
-      <div className="app__container">
-        <div className="app__top">
-          <div className="app__location">
-            <h1>{data.name}</h1>
-          </div>
-          <div className="app__temp">
-            {data.main ? <h2>{Math.round(data.main.temp)}°C</h2> : null}
-          </div>
-          <hr className="divider" />
-          <div className="app__description">
-            <p className="conditionsLabel">Current Conditions:</p>
-            {data.weather ? (
-              <p className="conditionsResults">
-                {data.weather[0].main} {getWeatherEmoji(data.weather[0].id)}
-              </p>
-            ) : null}
-          </div>
-        </div>
+          {showLocationPrompt && (
+            <div className="location-prompt">
+              <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
+              <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
+              <button className="secondary-button" onClick={() => setShowLocationPrompt(false)}>No, Thanks</button>
+            </div>
+          )}
 
-        {data.name && (
-          <div className="app__bottom">
-            <div className="app__feels">
-              <img src={feelsLikeIcon} alt="Feels like icon" className="icon" />
-              <div className="app__text">
-                <p className="app__label">Feels like:</p>
-                {data.main ? <p className="app__bold">{Math.round(data.main.feels_like)}°C</p> : null}
+          <div className="app__search">
+            <form
+              className="app__form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (location) fetchWeatherByCity(location);
+              }}
+            >
+              <input
+                className="app__input"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="Enter Location"
+                type="text"
+              />
+              <button className="app__button" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+
+          {data.name && (
+            <div className="app__container">
+              <div className="app__top">
+                <div className="app__location">
+                  <h1>{data.name}</h1>
+                </div>
+                <div className="app__temp">
+                  {data.main ? <h2>{Math.round(data.main.temp)}°C</h2> : null}
+                </div>
+                <hr className="divider" />
+                <div className="app__description">
+                  <p className="conditionsLabel">Current Conditions:</p>
+                  {data.weather ? (
+                    <p className="conditionsResults">
+                      {data.weather[0].main} {getWeatherEmoji(data.weather[0].id)}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="app__bottom">
+                <div className="app__feels">
+                  <img src={feelsLikeIcon} alt="Feels like icon" className="icon" />
+                  <div className="app__text">
+                    <p className="app__label">Feels like:</p>
+                    {data.main ? <p className="app__bold">{Math.round(data.main.feels_like)}°C</p> : null}
+                  </div>
+                </div>
+                <div className="app__humidity">
+                  <img src={humidityIcon} alt="Humidity icon" className="icon" />
+                  <div className="app__text">
+                    <p className="app__label">Humidity:</p>
+                    {data.main ? <p className="app__bold">{data.main.humidity}%</p> : null}
+                  </div>
+                </div>
+                <div className="app__wind">
+                  <img src={windIcon} alt="Wind icon" className="icon" />
+                  <div className="app__text">
+                    <p className="app__label">Wind:</p>
+                    {data.wind ? <p className="app__bold">{Math.round(data.wind.speed * 3.6)} km/h</p> : null}
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="app__humidity">
-              <img src={humidityIcon} alt="Humidity icon" className="icon" />
-              <div className="app__text">
-                <p className="app__label">Humidity:</p>
-                {data.main ? <p className="app__bold">{data.main.humidity}%</p> : null}
-              </div>
-            </div>
-            <div className="app__wind">
-              <img src={windIcon} alt="Wind icon" className="icon" />
-              <div className="app__text">
-                <p className="app__label">Wind:</p>
-                {data.wind ? <p className="app__bold">{Math.round(data.wind.speed * 3.6)} km/h</p> : null}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+          )}
 
-      {forecastData.length > 0 && (
-        <div className="app__forecast-section">
-          <h2 className="forecast__label">Five Day Forecast</h2>
-          <div className="app__forecast">
-            {forecastData.map((day, index) => (
-              <div key={index} className="forecast__card">
-                <p>{new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' })}</p>
-                <p>{Math.round(day.main.temp)}°C</p>
-                <p>{day.weather[0].main} {getWeatherEmoji(day.weather[0].id)}</p>
+          {forecastData.length > 0 && (
+            <div className="app__forecast-section">
+              <h2 className="forecast__label">Five Day Forecast</h2>
+              <div className="app__forecast">
+                {forecastData.map((day, index) => (
+                  <div key={index} className="forecast__card">
+                    <p>{new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' })}</p>
+                    <p>{Math.round(day.main.temp)}°C</p>
+                    <p>{day.weather[0].main} {getWeatherEmoji(day.weather[0].id)}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

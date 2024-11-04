@@ -29,6 +29,8 @@ function Navbar() {
           </NavLink>
         </li>
       </ul>
+      {/* Add the white line */}
+      <div className="navbar__line"></div>
     </nav>
   );
 }
