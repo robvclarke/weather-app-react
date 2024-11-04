@@ -13,11 +13,13 @@ function Home() {
   const [backgroundImage, setBackgroundImage] = useState(null);
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [showLocationPrompt, setShowLocationPrompt] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const apiKey = "0c52510bae0c2562825677b090d11b6b";
   const unsplashKey = "PGJKpfliiakxMxS97n55E2Ke2BAgBFW4S-Cx_BCZuxw";
 
   const fetchWeatherByCity = async (city) => {
+    setIsLoading(true);
     try {
       const weatherResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
@@ -26,13 +28,16 @@ function Home() {
       setLocation(city);
       fetchForecast(city);
       fetchBackgroundImage(city);
-      setShowHeader(false); 
+      setShowHeader(false);
     } catch (error) {
       console.error("Error fetching weather data", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const fetchWeatherByCoordinates = async (lat, lon) => {
+    setIsLoading(true);
     try {
       const weatherResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
@@ -42,11 +47,13 @@ function Home() {
       setLocation(city);
       fetchForecast(city);
       fetchBackgroundImage(city);
-      setShowHeader(false); 
+      setShowHeader(false);
       setLocationAllowed(true);
     } catch (error) {
       console.error("Error fetching weather data", error);
       setLocationAllowed(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -82,7 +89,7 @@ function Home() {
       (position) => {
         const { latitude, longitude } = position.coords;
         fetchWeatherByCoordinates(latitude, longitude);
-        setShowLocationPrompt(false); 
+        setShowLocationPrompt(false);
       },
       (error) => {
         console.error("Geolocation error:", error);
@@ -131,18 +138,25 @@ function Home() {
           : `linear-gradient(120deg, #14ADFE, #136EF3)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        backgroundRepeat: "no-repeat"
       }}
     >
-      {showHeader && !locationAllowed && (
+      {showHeader && (
         <h1 className="app__header">Clarke<br />Weather<br />Inc.</h1>
       )}
 
       {showLocationPrompt && (
         <div className="location-prompt">
-          <p>Would you like to grant <strong>'Clarke Weather Inc'</strong> location access to see the weather in your area?</p>
+          <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
           <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
           <button className="secondary-button" onClick={() => setShowLocationPrompt(false)}>No, Thanks</button>
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="loading">
+          <p>Loading weather data...</p>
+          <div className="spinner"></div>
         </div>
       )}
 
