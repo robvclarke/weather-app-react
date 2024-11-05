@@ -1,5 +1,6 @@
 import React from 'react';
-import donateImage from '../assets/Donate_Image.png'; // Update the image path as per your project structure
+import PaymentForm from '../components/PaymentForm';
+import donateImage from '../assets/Donate_Image.png';
 
 function Support() {
   return (
@@ -10,9 +11,7 @@ function Support() {
           <p>
             Clarke Weather Inc. relies on support from the community to keep providing accurate and reliable weather updates. Any contributions are greatly appreciated and go towards improving our services.
           </p>
-          <button className="primary-button">
-            Donate Now
-          </button>
+          <PaymentForm />
         </div>
         <div className="support-card__image">
           <img src={donateImage} alt="Support Clarke Weather Inc." />
