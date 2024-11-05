@@ -151,7 +151,7 @@ html, body {
 }
 
 .navbar__links .active {
-  color: #14ADFE;
+  color: #ffffff;
   text-decoration: underline;
 }
 
@@ -503,6 +503,90 @@ html, body {
   border-radius: 5px;
   overflow: hidden;
 }
+/* About Page Container */
+.about-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #74FAFF; /* Set background color to match the About page design */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px; /* Adjusted padding to push cards down and add space around them */
+  box-sizing: border-box;
+}
+
+/* About Card Styling */
+.about-card {
+  display: flex;
+  flex-direction: row;
+  background-color: white; /* Card background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 3rem; /* Increased margin to create more space between the two cards */
+  width: 100%;
+  max-width: 900px; /* Increased width for better readability */
+  transition: transform 0.4s ease-in-out;
+  opacity: 0; /* Initially hidden for fade effect */
+  align-items: stretch; /* Ensure equal height for image and text */
+}
+
+/* Card fade-in and fade-out effect */
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(20%);
+}
+
+/* Card Text Styling */
+.about-card__text {
+  flex: 1;
+  padding: 2rem;
+  color: #494949; /* Updated text color */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Headings and paragraphs in the text section */
+.about-card__text h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-family: Orbitron;
+  color: #0000FF;
+}
+
+.about-card__text p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Card Image Styling */
+.about-card__image {
+  flex: 1;
+  width: 50%; /* Set explicit width to ensure it takes the right half */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Ensure image fits within the container */
+}
+
+.about-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the right half and scales accordingly */
+}
+
+/* Ensure fade effect only impacts cards */
+.about-card.fade-out,
+.about-card.fade-in {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
 
 /* Mobile optimization */
 @media (max-width: 600px) {
