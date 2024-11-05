@@ -242,7 +242,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: #0000FF;
 }
 
 .loading p {
@@ -387,8 +387,8 @@ html, body {
 }
 
 .location-prompt .primary-button:hover {
-  background: #FFD033;
-  color: #111;
+  background: #3fb3b7;
+  color: #ffffff;
 }
 
 /* Secondary outline style for "No, Thanks" button */
@@ -405,7 +405,8 @@ html, body {
 }
 
 .location-prompt .secondary-button:hover {
-  background: rgba(255, 218, 97, 0.2); /* Light overlay on hover */
+  background: #14ADFE; 
+  color: white;
 }
 
 
