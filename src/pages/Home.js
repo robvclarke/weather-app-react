@@ -4,6 +4,7 @@ import feelsLikeIcon from '../assets/feels_Like.svg';
 import humidityIcon from '../assets/Humidity_Icon.svg';
 import windIcon from '../assets/Wind_Icon.svg';
 import locationIcon from '../assets/location_icon.svg';
+import gradientLogo from '../assets/GradientLogo.png';
 import { useForm } from "react-hook-form";
 
 function Home() {
@@ -139,10 +140,10 @@ function Home() {
     <div
       className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
       style={{
-        backgroundImage:
-          backgroundImage && (isLoading || !showHeader)
-            ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
-            : `linear-gradient(120deg, #14ADFE, #136EF3)`,
+        backgroundImage: backgroundImage
+          ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
+          : 'none',
+        backgroundColor: backgroundImage ? "transparent" : "#74FAFF",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -158,7 +159,16 @@ function Home() {
       {!isLoading && (
         <>
           {showHeader && (
-            <h1 className="app__header">Clarke<br />Weather<br />Inc.</h1>
+            <div className="app__header">
+              <img src={gradientLogo} alt="Clarke Weather Inc Logo" className="app__logo" />
+            </div>
+          )}
+
+          {/* Show the H1 title only when data hasn't loaded yet */}
+          {showHeader && !data.name && (
+            <div className="app__title-container">
+              <h1 className="app__title">Clarke Weather Inc.</h1>
+            </div>
           )}
 
           {showLocationPrompt && (

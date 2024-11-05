@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=New+Nord:wght@400&display=swap');
+
+
 
 
 /* Apply Outfit font globally */
@@ -37,9 +41,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(120deg, #14ADFE, #136EF3);
   background-size: 200% 200%;
-  animation: gradientMove 15s ease infinite;
   z-index: -2;
 }
 
@@ -77,10 +79,27 @@ html, body {
   padding: 1rem;
 }
 
+.app__logo {
+  width: 350px;
+  height: 350px;
+  margin-bottom: 0px;
+  padding-bottom: 0; /* Adjust this value to reduce space */
+}
+
+.app__title {
+    font-family: 'Poppins', sans-serif; /* Alternative if New Nord isn't working */
+    font-size: 30px;
+    color: #0000FF;
+    margin-top: 0;
+    font-weight: 100;
+    text-align: center;
+    animation: none;
+}
+
 /* Navbar Styling */
 .navbar {
   width: 100%;
-  background: linear-gradient(120deg, #ffffff, #ecf3ff);
+  background: #74FAFF;
   color: rgb(0, 0, 0);
   padding: 0.05rem 2rem;
   box-sizing: border-box;
@@ -91,7 +110,6 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .navbar__logo-wrapper {
@@ -126,7 +144,7 @@ html, body {
 
 .navbar__links a {
   font-family: 'Poppins', sans-serif;
-  color: #494949;
+  color: #0000FF;
   text-decoration: none;
   font-weight: 600;
 }
@@ -153,7 +171,7 @@ html, body {
   text-align: center;
   font-family: 'Fascinate Inline', cursive;
   color: #ffffff;
-  font-size: 4rem;
+  font-size: 1rem;
   line-height: 1.2;
   margin-bottom: 2rem;
   animation: subtleScale 1.5s ease-in-out infinite;
@@ -173,19 +191,19 @@ html, body {
   padding: .7rem 1.5rem;
   font-size: 1.2rem;
   border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, .8);
-  background: rgba(255, 255, 255, .2);
-  color: white;
+  border: 1px solid rgba(0, 0, 255, 1);
+  background: rgba(255, 255, 255, .5);
+  color: black;
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
   display: block;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
 }
 
 .app__input::placeholder {
-  color: #f8f8f8;
+  color: black;
   opacity: 1;
 }
 
@@ -195,8 +213,8 @@ html, body {
   font-size: 1.2rem;
   border-radius: 5px;
   border: none;
-  background-color: rgba(255, 255, 255, .2);
-  color: white;
+  color: #494949;
+  background: rgba(255, 255, 255,);
   cursor: pointer;
   width: 100%;
   max-width: 300px;
@@ -208,6 +226,11 @@ html, body {
 
 .app__button:hover {
   background-color: rgba(255, 255, 255, .4);
+}
+
+.app__logo {
+  width: 350px;
+  height: 350px;
 }
 
 .loading {
@@ -318,9 +341,9 @@ html, body {
   max-width: 500px;
   margin: 1rem auto 2rem;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 255, 1);
   color: #fff;
-  border-radius: 8px;
+  border-radius: 5px;
   text-align: center;
   z-index: 2;
 }
@@ -350,8 +373,8 @@ html, body {
   padding: 10px 20px;
   margin: 0 5px;
   font-size: 1rem;
-  color: #333;
-  background: #FFDA61;
+  color: #0000FF;
+  background: #74FAFF;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -368,9 +391,9 @@ html, body {
   padding: 10px 20px;
   margin: 0 5px;
   font-size: 1rem;
-  color: #FFDA61;
+  color: #74FAFF;
   background: transparent;
-  border: 2px solid #FFDA61;
+  border: 2px solid #74FAFF;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;

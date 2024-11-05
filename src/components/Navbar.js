@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import logo from "../assets/Hi-Res-Logo.svg"; // Adjust path if necessary
+import logo from "../assets/GradientLogo.png"; // Adjust path if necessary
 
 function Navbar() {
   return (
@@ -10,7 +10,6 @@ function Navbar() {
         <Link to="/" onClick={() => window.location.reload()}>
           <img src={logo} alt="Clarke Weather Inc. Logo" className="navbar__logo-image" />
         </Link>
-        <h2 className="navbar__logo-text">Clarke Weather Inc.</h2>
       </div>
       <ul className="navbar__links">
         <li>
@@ -29,8 +28,6 @@ function Navbar() {
           </NavLink>
         </li>
       </ul>
-      {/* Add the white line */}
-      <div className="navbar__line"></div>
     </nav>
   );
 }
