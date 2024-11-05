@@ -17,7 +17,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
   const apiKey = "0c52510bae0c2562825677b090d11b6b";
   const unsplashKey = "PGJKpfliiakxMxS97n55E2Ke2BAgBFW4S-Cx_BCZuxw";
@@ -176,16 +176,18 @@ function Home() {
             <form
               className="app__form"
               onSubmit={handleSubmit((data) => {
-                if (data.location) fetchWeatherByCity(data.location);
+                if (data.location.trim()) fetchWeatherByCity(data.location.trim());
               })}
             >
               <input
                 className="app__input"
                 {...register("location", { required: "Please enter a location." })}
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
                 placeholder="Enter Location"
                 type="text"
+                onChange={(e) => {
+                  setLocation(e.target.value);
+                  setValue('location', e.target.value);
+                }}
               />
               {errors.location && <p className="error-message">{errors.location.message}</p>}
               {errorMessage && <p className="error-message">{errorMessage}</p>}
