@@ -48,7 +48,7 @@ function About() {
           <h1>About Clarke Weather Inc.</h1>
           <p>
             Clarke Weather Inc. is a family-run weather company based in Dublin,
-            Ireland. Founded in 1992 by visionary CEO Robert Clarke, the company started
+            Ireland. Founded in 1991 by visionary CEO Robert Clarke, the company started
             as a small local business providing weather updates to farmers and
             fishermen in the community. Over the years, it has grown into a
             trusted source of weather information for the entire region and indeed the world. With a
