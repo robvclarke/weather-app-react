@@ -590,13 +590,16 @@ html, body {
 /* Support Page Container */
 .support-page {
   width: 100%;
-  min-height: 100vh;
+  min-height: 100vh; /* Ensure the page takes up the entire viewport height */
   background-color: #74FAFF; /* Background color for the Support page */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 60px 20px; /* Padding to push the card down and add space around */
   box-sizing: border-box;
+  position: relative;
+  justify-content: center; /* Ensures the content is centered */
+  gap: 2rem; /* Add spacing between elements on the support page */
 }
 
 /* Support Card Styling */
@@ -672,6 +675,7 @@ html, body {
   border-bottom-right-radius: 10px; /* Match card's border radius */
 }
 
+/* Payment Form Styling */
 .payment-form {
   width: 100%;
   max-width: 400px;
@@ -679,6 +683,7 @@ html, body {
   text-align: center;
 }
 
+/* Stripe form element styling */
 .StripeElement {
   box-sizing: border-box;
   width: 100%;
@@ -686,23 +691,77 @@ html, body {
   margin: 10px 0;
   border: 1px solid #0000FF;
   border-radius: 4px;
+  background: #ffffff;
 }
 
-.primary-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: white;
-  background: #0000FF;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 1rem;
+/* Thank You Page Container */
+.thank-you-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #74FAFF; /* Background color for the Thank You page */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px; /* Padding to push the card down and add space around */
+  box-sizing: border-box;
 }
 
-.primary-button:hover {
-  background: #3f7bff;
+/* Thank You Card Styling */
+.thank-you-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white; /* Card background color for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px; /* Set card width */
+  transition: transform 0.4s ease-in-out, opacity 0.5s ease-in-out; /* Add transition for any effects */
+  opacity: 1; /* Set to 1 if you want it to be visible immediately */
 }
 
+/* Thank You Card Text Styling */
+.thank-you-card__text {
+  padding: 2rem;
+  color: #494949; /* Text color */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Headings and paragraphs in the text section */
+.thank-you-card__text h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-family: Orbitron, sans-serif; /* Use Orbitron font */
+  color: #0000FF; /* Blue color */
+}
+
+.thank-you-card__text p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  text-align: center; /* Center align text */
+}
+
+/* Thank You Card Image Styling */
+.thank-you-card__image {
+  flex: 1;
+  width: 100%; /* Full width of the card */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Ensure image fits within container */
+  margin-top: 1rem; /* Add margin to separate the image from text */
+}
+
+.thank-you-card__image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Scale image to cover the bottom half */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px; /* Match card's border radius */
+}
 
 /* Mobile optimization */
 @media (max-width: 600px) {
