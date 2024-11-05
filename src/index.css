@@ -161,10 +161,14 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Search bar and button */
 .app__search {
   text-align: center;
-  padding: 1rem;
+  padding: 1rem 0;
+  transition: padding-top 0.3s ease; /* Smooth transition */
+}
+
+.app__search--loaded {
+  padding-top: 3rem; /* Extra padding when data loads */
 }
 
 .app__header {
@@ -488,6 +492,14 @@ html, body {
   font-size: 1.5rem;
   font-weight: bold;
   color: rgb(255, 255, 255);
+}
+
+.app__map {
+  width: 100%;
+  max-width: 700px;
+  margin: 1rem auto;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 /* Mobile optimization */

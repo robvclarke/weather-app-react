@@ -136,6 +136,11 @@ function Home() {
     }
   };
 
+  const getMapUrl = (city) => {
+    const googleMapsApiKey = "AIzaSyA2DqzlChVXzYUJnwV9NS_VUOvXXXOfiyU";
+    return `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(city)}`;
+  };
+
   return (
     <div
       className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
@@ -182,7 +187,7 @@ function Home() {
             </div>
           )}
 
-          <div className="app__search">
+          <div className={`app__search ${data.name ? 'app__search--loaded' : ''}`}>
             <form
               className="app__form"
               onSubmit={handleSubmit((data) => {
@@ -265,6 +270,20 @@ function Home() {
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Google Maps Embed */}
+          {data.name && (
+            <div className="app__map">
+              <iframe
+                width="100%"
+                height="300"
+                frameBorder="0"
+                style={{ border: 0 }}
+                src={getMapUrl(data.name)}
+                allowFullScreen
+              ></iframe>
             </div>
           )}
         </>
