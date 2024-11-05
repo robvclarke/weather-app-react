@@ -32,8 +32,8 @@ function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? "active" : "")}>
-            Contact
+          <NavLink to="/support" className={({ isActive }) => (isActive ? "active" : "")}>
+            Support Us
           </NavLink>
         </li>
       </ul>
