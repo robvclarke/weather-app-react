@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ceoImage from "../assets/Clarke_CEO.png";
 import dublinImage from "../assets/Dublin.png";
+import promiseImage from "../assets/Sustainability.png";
 
 function About() {
   const cardRefs = useRef([]);
@@ -37,11 +38,11 @@ function About() {
   }, []);
 
   return (
-    <div className="about-page" style={{ backgroundColor: "#74FAFF" }}>
+    <div className="about-page">
       <div
         className="about-card fade-out"
+        data-index="0"
         ref={(el) => (cardRefs.current[0] = el)}
-        style={{ marginTop: "100px" }}
       >
         <div className="about-card__text">
           <h1>About Clarke Weather Inc.</h1>
@@ -55,6 +56,14 @@ function About() {
             dedicated to serving the people of Dublin with reliable weather
             forecasts and updates.
           </p>
+          <p>
+            Our journey began with a single weather station in our backyard.
+            From there, our passion for meteorology and our dedication to our
+            community helped us expand. We believe that accurate, timely weather
+            information can make a real difference in people's lives, from
+            helping farmers with crop decisions to ensuring safety during
+            extreme weather events.
+          </p>
         </div>
         <div className="about-card__image">
           <img src={ceoImage} alt="CEO of Clarke Weather Inc." />
@@ -63,8 +72,8 @@ function About() {
 
       <div
         className="about-card fade-out"
+        data-index="1"
         ref={(el) => (cardRefs.current[1] = el)}
-        style={{ marginTop: "50px" }}
       >
         <div className="about-card__text">
           <h1>Our Mission</h1>
@@ -77,9 +86,44 @@ function About() {
             focusing on the needs of our community, we aim to help people make
             informed decisions that contribute to a sustainable future.
           </p>
+          <p>
+            We strive to use our platform to educate the public about climate
+            change and its impact on our environment. Our forecasts not only
+            help people plan their days but also help communities prepare for
+            extreme weather, reducing the risk of damage and ensuring safety for
+            all.
+          </p>
         </div>
         <div className="about-card__image">
           <img src={dublinImage} alt="Dublin, Ireland" />
+        </div>
+      </div>
+
+      <div
+        className="about-card fade-out"
+        data-index="2"
+        ref={(el) => (cardRefs.current[2] = el)}
+      >
+        <div className="about-card__text">
+          <h1>Our Promise</h1>
+          <p>
+            At Clarke Weather Inc., we are committed to fostering diversity,
+            inclusion, and sustainability in everything we do. We believe that
+            our strength lies in our people, and we are dedicated to creating an
+            environment where everyone feels valued and respected. Our team
+            reflects the diverse community we serve, and we strive to ensure
+            that every voice is heard.
+          </p>
+          <p>
+            Sustainability is at the heart of our business. We are constantly
+            exploring new ways to reduce our carbon footprint and make our
+            operations more eco-friendly. From using renewable energy to power
+            our offices to reducing waste through thoughtful practices, we are
+            dedicated to making a positive impact on the planet.
+          </p>
+        </div>
+        <div className="about-card__image">
+          <img src={promiseImage} alt="Sustainability" />
         </div>
       </div>
     </div>
