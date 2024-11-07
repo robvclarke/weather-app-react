@@ -1,0 +1,47 @@
+.
+├── README.md
+├── package-lock.json
+├── package.json
+├── project-structure.txt
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+└── src
+    ├── App.js
+    ├── assets
+    │   ├── ClarkeWeatherLogo.png
+    │   ├── Clarke_CEO.jpg
+    │   ├── Clarke_CEO.png
+    │   ├── Donate_Image.png
+    │   ├── Dublin.jpg
+    │   ├── Dublin.png
+    │   ├── Example Project Screen.png
+    │   ├── GradientLogo.png
+    │   ├── GradientLogo.svg
+    │   ├── Hi-Res-Logo.svg
+    │   ├── Humidity_Icon.svg
+    │   ├── Logo with Title.png
+    │   ├── SmallerClarkeLogo.png
+    │   ├── Sustainability.png
+    │   ├── Thank_You_Image.png
+    │   ├── Weather_Icon.png
+    │   ├── Weather_Pattern.png
+    │   ├── Wind_Icon.svg
+    │   ├── feels_Like.svg
+    │   ├── hero_image.png
+    │   └── location_icon.svg
+    ├── components
+    │   └── Navbar.js
+    ├── index.css
+    ├── index.js
+    └── pages
+        ├── About.js
+        ├── Home.js
+        ├── SupportUs.js
+        └── ThankYou.js
+
+6 directories, 39 files
