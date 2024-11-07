@@ -1,7 +1,7 @@
 
 # React Weather App
 
-![Project Screenshot](./src/assets/Example%20Project%20Screen.png)
+![Project Screenshot](./src/assets/hero_image.png)
 
 
 A dynamic weather application that provides current weather information and a five-day forecast based on location input. It uses data from the OpenWeather API for weather information and images from the Unsplash API to provide background images relevant to the searched location.
