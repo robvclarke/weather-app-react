@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/weather-app-react/static/css/main.0112b446.css",
-    "main.js": "/weather-app-react/static/js/main.c49ffbf5.js",
+    "main.js": "/weather-app-react/static/js/main.7b96d1bb.js",
     "static/media/Clarke_CEO.png": "/weather-app-react/static/media/Clarke_CEO.75d6337483420c7064f1.png",
     "static/media/Dublin.png": "/weather-app-react/static/media/Dublin.1707fd4328e6984fc47d.png",
     "static/media/Thank_You_Image.png": "/weather-app-react/static/media/Thank_You_Image.ed57f1b188e4ce7e2a5f.png",
@@ -14,10 +14,10 @@
     "static/media/Humidity_Icon.svg": "/weather-app-react/static/media/Humidity_Icon.347ad8f4007f99d78b5588c7a731a19d.svg",
     "index.html": "/weather-app-react/index.html",
     "main.0112b446.css.map": "/weather-app-react/static/css/main.0112b446.css.map",
-    "main.c49ffbf5.js.map": "/weather-app-react/static/js/main.c49ffbf5.js.map"
+    "main.7b96d1bb.js.map": "/weather-app-react/static/js/main.7b96d1bb.js.map"
   },
   "entrypoints": [
     "static/css/main.0112b446.css",
-    "static/js/main.c49ffbf5.js"
+    "static/js/main.7b96d1bb.js"
   ]
 }
