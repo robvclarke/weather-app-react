@@ -787,39 +787,113 @@ html, body {
     width: 100px;
     height: 100px;
     margin-bottom: 0px;
-    padding-bottom: 0; /* Adjust this value to reduce space */
+    padding-bottom: 0;
+  }
+
+  .location-prompt {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .location-prompt .primary-button, .location-prompt .secondary-button {
+    width: 100%;
+    margin: 0.3rem 0;
+  }
+
+  .loading p {
+    font-size: 1.2rem;
+  }
+
+  .app__location h1 {
+    font-size: 2.2rem;
+  }
+
+  .app__temp h2 {
+    font-size: 2rem;
+  }
+
+  .app__title {
+    font-size: 25px;
+  }
+
+  /* Push down content to avoid being hidden under navbar */
+  .page-container {
+    padding-top: 150px;
+  }
+
+  /* Additional spacing for app__search */
+  .app__search {
+    margin-top: 2.5rem;
   }
 
   .app__bottom {
     padding: 0.7rem;
     width: 100%;
     flex-direction: column;
+    display: flex;
+    align-items: center; /* Center items horizontally */
   }
 
-  .app__forecast {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .forecast__card {
-    width: 80%;
-    margin-bottom: 1rem;
-  }
-
+  /* Center app__feels, app__humidity, and app__wind content */
   .app__feels, .app__humidity, .app__wind {
-    justify-content: flex-start;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content within each card */
+    width: 100%; /* Ensure full width for centering */
+    margin: 0.5rem 0; /* Add spacing between items */
   }
 
   .icon {
     width: 40px;
     height: 40px;
-    margin-right: 24px;
+    margin-right: 8px; /* Reduce margin for better centering */
   }
 
   .app__bold, .conditionsResults, .app__label {
     font-size: 1.5rem;
     margin-bottom: 16px;
+    text-align: center; /* Center-align text inside each element */
+  }
+
+  /* Forecast section container styling for full-width alignment */
+  .app__forecast-section {
+    padding: 0; /* Remove padding to prevent horizontal overflow */
+    margin: 0 auto;
+    width: 100%; /* Ensure it takes full width of the viewport */
+    box-sizing: border-box;
+  }
+
+  /* Adjust app__forecast to center cards fully */
+  .app__forecast {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0; /* Remove padding for exact centering */
+    box-sizing: border-box;
+  }
+
+  .forecast__card {
+    width: 90%; /* Narrower width to prevent overflow */
+    max-width: 280px; /* Set max width to prevent stretching */
+    margin: 0.5rem auto; /* Center with auto margins */
+    padding: 1rem; /* Add padding within each card */
+    box-sizing: border-box;
+  }
+
+  /* Adjust Google Maps iframe width and add padding */
+  .app__map {
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .app__map iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 5px;
   }
 
   .navbar {
@@ -827,7 +901,38 @@ html, body {
     padding: 1rem;
   }
 
+  /* Distribute navbar links evenly */
   .navbar__links {
+    width: 100%; /* Take full width */
+    display: flex;
+    justify-content: space-around; /* Evenly distribute links */
+    padding: 0;
     margin-top: 10px;
+    list-style: none;
+  }
+
+  .navbar__links li {
+    margin: 0; /* Remove extra spacing to keep items centered */
+  }
+
+   .about-card {
+    flex-direction: column; /* Change to vertical layout */
+    margin-top: 80px; /* Adjust to ensure entire card is below the navbar */
+  }
+
+  /* Ensure image is displayed in full below the text */
+  .about-card__image {
+    width: 100%; /* Take full width of the card */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 1rem; /* Add spacing between text and image */
+  }
+   /* Ensure the support card is pushed below the navbar */
+   .support-card {
+    margin-top: 80px; /* Adjust as needed to clear the navbar */
+  }
+  .thank-you-card {
+    margin-top: 80px; /* Adjust as needed to clear the navbar */
   }
 }
+
+
