@@ -146,7 +146,7 @@ function Home() {
       className={`app ${isLoading ? 'app--loading' : 'app--loaded'}`}
       style={{
         backgroundImage: backgroundImage
-          ? `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${backgroundImage})`
+          ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`
           : 'none',
         backgroundColor: backgroundImage ? "transparent" : "#74FAFF",
         backgroundSize: "cover",
@@ -163,6 +163,17 @@ function Home() {
 
       {!isLoading && (
         <>
+          {showLocationPrompt && (
+            <div className="location-prompt">
+              <div className="location-prompt__header">
+                <img src={locationIcon} alt="Location icon" className="location-icon" />
+                <p>Would you like to grant 'Clarke Weather Inc' location access to see the weather in your area?</p>
+              </div>
+              <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
+              <button className="secondary-button" onClick={() => setShowLocationPrompt(false)}>No, Thanks</button>
+            </div>
+          )}
+
           {showHeader && (
             <div className="app__header">
               <img src={gradientLogo} alt="Clarke Weather Inc Logo" className="app__logo" />
@@ -173,17 +184,6 @@ function Home() {
           {showHeader && !data.name && (
             <div className="app__title-container">
               <h1 className="app__title">Clarke Weather Inc.</h1>
-            </div>
-          )}
-
-          {showLocationPrompt && (
-            <div className="location-prompt">
-              <div className="location-prompt__header">
-                <img src={locationIcon} alt="Location icon" className="location-icon" />
-                <p>Would you like to grant Clarke Weather Inc location access to see the weather in your area?</p>
-              </div>
-              <button className="primary-button" onClick={requestUserLocation}>Allow Location</button>
-              <button className="secondary-button" onClick={() => setShowLocationPrompt(false)}>No, Thanks</button>
             </div>
           )}
 
