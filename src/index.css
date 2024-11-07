@@ -250,6 +250,8 @@ html, body {
 .loading p {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  font-family: Orbitron;
+  font-weight: 700;
 }
 
 .spinner {
@@ -779,6 +781,13 @@ html, body {
 @media (max-width: 600px) {
   .app__container {
     padding: 1rem;
+  }
+
+  .app__logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0px;
+    padding-bottom: 0; /* Adjust this value to reduce space */
   }
 
   .app__bottom {
