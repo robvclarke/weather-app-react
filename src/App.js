@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import SupportUs from "./pages/SupportUs";
 import ThankYou from "./pages/ThankYou";
+import ContactUs from "./pages/ContactUs"; 
+import MessageSent from "./pages/MessageSent"; // Import the MessageSent component
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -26,6 +28,8 @@ function App() {
           }
         />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/contact" element={<ContactUs />} /> {/* ContactUs route */}
+        <Route path="/message-sent" element={<MessageSent />} /> {/* MessageSent confirmation route */}
       </Routes>
     </div>
   );
