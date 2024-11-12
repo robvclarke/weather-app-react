@@ -1,15 +1,21 @@
+// ContactUs.js
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import contactImage from "../assets/Contact_Image.png";
+import axios from "axios";
 
 function ContactUs() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log("Form data submitted:", data);
-    setIsSubmitted(true);
-    // Clear form or add further actions like backend integration
+  const onSubmit = async (data) => {
+    try {
+      await axios.post("http://localhost:5000/send-email", data); // Adjust to your backend URL
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("There was an issue sending your message. Please try again.");
+    }
   };
 
   return (
