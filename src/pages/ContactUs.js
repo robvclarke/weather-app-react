@@ -1,32 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import contactImage from "../assets/Contact_Image.png";
 
 function ContactUs() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Redirect to the confirmation page after form submission
-    navigate("/message-sent");
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
+  const onSubmit = (data) => {
+    console.log("Form data submitted:", data);
+    setIsSubmitted(true);
+    // Clear form or add further actions like backend integration
   };
 
   return (
@@ -35,40 +18,41 @@ function ContactUs() {
         <div className="contact-card__text">
           <h1>Contact Clarke Weather Inc.</h1>
           <p>We'd love to hear from you! Feel free to get in touch with any questions, feedback, or suggestions.</p>
-          <form onSubmit={handleSubmit} className="contact-form">
+          <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
             <label htmlFor="name">Your Name</label>
             <input
               type="text"
               id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
+              {...register("name", { required: "Name is required." })}
               placeholder="Enter your name"
-              required
             />
+            {errors.name && <p className="error-message">{errors.name.message}</p>}
+            
             <label htmlFor="email">Your Email</label>
             <input
               type="email"
               id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
+              {...register("email", {
+                required: "Email is required.",
+                pattern: {
+                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                  message: "Please enter a valid email address."
+                }
+              })}
               placeholder="Enter your email address"
-              required
             />
+            {errors.email && <p className="error-message">{errors.email.message}</p>}
+            
             <label htmlFor="message">Message</label>
             <textarea
               id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
+              {...register("message", { required: "Message is required." })}
               placeholder="Write your message here"
               rows="4"
-              required
             />
-            <button type="submit" className="primary-button">
-              Send Message
-            </button>
+            {errors.message && <p className="error-message">{errors.message.message}</p>}
+            
+            <button type="submit" className="primary-button">Send Message</button>
           </form>
         </div>
         <div className="contact-card__image">

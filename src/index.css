@@ -1016,6 +1016,14 @@ html, body {
   border-bottom-right-radius: 10px;
 }
 
+.error-message {
+  color: red; /* Set text color to red */
+  font-size: 0.9rem; /* Slightly smaller font size */
+  margin-top: 0.25rem; /* Reduce space above the error message */
+  margin-bottom: 0.5rem; /* Reduce space below the error message */
+  padding: 0; /* Remove any extra padding around error messages */
+}
+
 
 /* Mobile optimization */
 @media (max-width: 600px) {
