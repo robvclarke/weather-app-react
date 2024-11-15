@@ -1,5 +1,9 @@
 .
 ├── README.md
+├── backend
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js
 ├── package-lock.json
 ├── package.json
 ├── project-structure.txt
@@ -16,6 +20,7 @@
     │   ├── ClarkeWeatherLogo.png
     │   ├── Clarke_CEO.jpg
     │   ├── Clarke_CEO.png
+    │   ├── Contact_Image.png
     │   ├── Donate_Image.png
     │   ├── Dublin.jpg
     │   ├── Dublin.png
@@ -40,8 +45,10 @@
     ├── index.js
     └── pages
         ├── About.js
+        ├── ContactUs.js
         ├── Home.js
+        ├── MessageSent.js
         ├── SupportUs.js
         └── ThankYou.js
 
-6 directories, 39 files
+7 directories, 45 files

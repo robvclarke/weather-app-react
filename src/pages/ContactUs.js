@@ -10,14 +10,14 @@ function ContactUs() {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:5000/send-email", data); // Adjust to your backend URL
+      await axios.post("http://localhost:5001/contact", data);
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error sending message:", error);
       alert("There was an issue sending your message. Please try again.");
     }
   };
-
+  
   return (
     <div className="contact-page">
       <div className="contact-card">
