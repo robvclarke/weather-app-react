@@ -34,6 +34,7 @@ app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Define Your Routes Here
+
 // Example: Contact Form Submission
 app.post('/contact', (req, res) => {
   const { name, email, message } = req.body;
@@ -56,7 +57,7 @@ app.post('/contact', (req, res) => {
   });
 });
 
-// Example: Create Payment Intent
+// Updated: Create Payment Intent (without confirmation)
 app.post('/create-payment-intent', async (req, res) => {
   const { amount, paymentMethodId } = req.body;
   console.log('Received payment intent request:', req.body); // Log the received data
@@ -66,9 +67,9 @@ app.post('/create-payment-intent', async (req, res) => {
       amount: amount, // Amount in cents
       currency: 'eur', // Your desired currency
       payment_method: paymentMethodId,
-      confirmation_method: 'manual',
-      confirm: true,
-      return_url: 'http://localhost:3000/thank-you', // Update as needed
+      // Removed confirmation_method and confirm to avoid double confirmation
+      // confirmation_method: 'manual',
+      // confirm: true,
       // Optionally, enable automatic payment methods
       // automatic_payment_methods: {
       //   enabled: true,

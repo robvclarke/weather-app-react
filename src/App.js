@@ -14,7 +14,6 @@ import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 function App() {
-  console.log("Stripe Publishable Key:", process.env.REACT_APP_STRIPE_PUBLIC_KEY); // Temporary log
   return (
     <div className="app">
       <Navbar />

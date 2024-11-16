@@ -9,6 +9,8 @@ function SupportUs() {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
+  
+  // Initialize amount as a number for consistency
   const [amount, setAmount] = useState("");
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -65,8 +67,10 @@ function SupportUs() {
 
       const { clientSecret } = response.data;
 
-      // Confirm the Payment Intent on the client
-      const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret);
+      // Confirm the Payment Intent on the client, including payment_method
+      const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
 
       if (confirmError) {
         console.error("Payment Confirmation Error:", confirmError);
@@ -79,7 +83,8 @@ function SupportUs() {
 
       if (paymentIntent.status === 'succeeded') {
         console.log("Payment succeeded:", paymentIntent);
-        navigate("/thank-you");
+        // Pass payment_intent and payment_intent_status as query params
+        navigate(`/thank-you?payment_intent=${paymentIntent.id}&payment_intent_status=${paymentIntent.status}`);
       } else {
         console.log("Payment status:", paymentIntent.status);
         setError("Payment did not succeed. Please try again.");
