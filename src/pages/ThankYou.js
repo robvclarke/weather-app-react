@@ -1,30 +1,68 @@
-import React from "react";
-import thankYouImage from "../assets/Thank_You_Image.png"; // Update the path and file name if necessary
+// ThankYou.js
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function ThankYou() {
-  return (
-    <div className="thank-you-page">
-      <div className="thank-you-card">
-        <div className="thank-you-card__text">
-          <h1>Thank You!</h1>
-          <p>
-            We truly appreciate your support for Clarke Weather Inc. Your
-            contribution helps us continue to provide accurate and timely
-            weather updates to our community. Thank you for being a part of
-            our journey.
-          </p>
-          <p>
-            Your support means a lot to us and our mission to deliver
-            high-quality weather services. Together, we can help keep our
-            community informed and safe.
-          </p>
-        </div>
-        <div className="thank-you-card__image">
-          <img src={thankYouImage} alt="Thank you for supporting Clarke Weather Inc." />
-        </div>
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [paymentStatus, setPaymentStatus] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Parse query parameters from the URL
+    const query = new URLSearchParams(location.search);
+    const paymentIntentId = query.get('payment_intent');
+    const paymentIntentStatus = query.get('payment_intent_status');
+
+    if (paymentIntentId) {
+      // Optionally, verify the PaymentIntent status with your backend
+      // This step ensures that the payment was indeed successful
+      axios.get(`http://localhost:5001/payment-intent/${paymentIntentId}`)
+        .then(response => {
+          setPaymentStatus(response.data.status);
+        })
+        .catch(err => {
+          console.error('Error verifying payment status:', err);
+          setError('Unable to verify payment status. Please contact support.');
+        });
+    } else {
+      setError('No payment information found.');
+    }
+  }, [location]);
+
+  if (error) {
+    return (
+      <div>
+        <h2>Payment Error</h2>
+        <p>{error}</p>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (!paymentStatus) {
+    return (
+      <div>
+        <h2>Processing Payment...</h2>
+      </div>
+    );
+  }
+
+  if (paymentStatus === 'succeeded') {
+    return (
+      <div>
+        <h2>Thank You for Your Donation!</h2>
+        <p>Your payment was successful.</p>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h2>Payment Status: {paymentStatus}</h2>
+        <p>Please try again or contact support.</p>
+      </div>
+    );
+  }
 }
 
 export default ThankYou;

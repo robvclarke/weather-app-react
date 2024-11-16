@@ -1,3 +1,4 @@
+// App.js
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -10,14 +11,15 @@ import MessageSent from "./pages/MessageSent";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe("your-stripe-public-key");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 function App() {
+  console.log("Stripe Publishable Key:", process.env.REACT_APP_STRIPE_PUBLIC_KEY); // Temporary log
   return (
     <div className="app">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} /> {/* Explicitly set the home route */}
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route
           path="/support"

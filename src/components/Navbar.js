@@ -1,6 +1,7 @@
+// Navbar.js
 import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import logo from "../assets/GradientLogo.png"; // Adjust path if necessary
+import logo from "../assets/GradientLogo.png";
 
 function Navbar() {
   const location = useLocation();

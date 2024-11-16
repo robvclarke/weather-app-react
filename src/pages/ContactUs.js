@@ -3,18 +3,23 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import contactImage from "../assets/Contact_Image.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function ContactUs() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     try {
       await axios.post("http://localhost:5001/contact", data);
-      setIsSubmitted(true);
+      navigate("/message-sent"); // Navigate to the message sent page
     } catch (error) {
       console.error("Error sending message:", error);
       alert("There was an issue sending your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
   
@@ -25,6 +30,7 @@ function ContactUs() {
           <h1>Contact Clarke Weather Inc.</h1>
           <p>We'd love to hear from you! Feel free to get in touch with any questions, feedback, or suggestions.</p>
           <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
+            {/* Add your form fields here */}
             <label htmlFor="name">Your Name</label>
             <input
               type="text"
@@ -33,7 +39,7 @@ function ContactUs() {
               placeholder="Enter your name"
             />
             {errors.name && <p className="error-message">{errors.name.message}</p>}
-            
+
             <label htmlFor="email">Your Email</label>
             <input
               type="email"
@@ -48,7 +54,7 @@ function ContactUs() {
               placeholder="Enter your email address"
             />
             {errors.email && <p className="error-message">{errors.email.message}</p>}
-            
+
             <label htmlFor="message">Message</label>
             <textarea
               id="message"
@@ -57,8 +63,10 @@ function ContactUs() {
               rows="4"
             />
             {errors.message && <p className="error-message">{errors.message.message}</p>}
-            
-            <button type="submit" className="primary-button">Send Message</button>
+
+            <button type="submit" className="primary-button" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </button>
           </form>
         </div>
         <div className="contact-card__image">

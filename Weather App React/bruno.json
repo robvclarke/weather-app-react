@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Weather App React",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
