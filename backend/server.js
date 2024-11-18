@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
 app.use(helmet()); // Secure HTTP headers
 app.use(morgan('combined')); // Log HTTP requests
 app.use(cors({
-  origin: 'http://localhost:3000', // Update this to match your frontend's origin
+  origin: 'https://salty-sea-56494-33b3c48feb13.herokuapp.com', // Heroku frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
