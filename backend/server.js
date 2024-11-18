@@ -36,22 +36,37 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Define Weather Route
 app.get('/weather', async (req, res) => {
-  const { lat, lon } = req.query; // Extract lat and lon from query parameters
+  const { lat, lon, q } = req.query; // Extract lat, lon, and q (city) from query parameters
 
-  if (!lat || !lon) {
-    return res.status(400).json({ error: 'Latitude and longitude are required.' });
+  if (!lat && !lon && !q) {
+    return res.status(400).json({ error: 'Latitude, longitude, or city (q) is required.' });
   }
 
   try {
     const apiKey = process.env.OPENWEATHERMAP_API_KEY; // Assuming you have the API key in your environment variables
-    const weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
-      params: {
-        lat,
-        lon,
-        units: 'metric',
-        appid: apiKey
-      }
-    });
+    let weatherResponse;
+
+    // If lat and lon are provided, use them for geolocation
+    if (lat && lon) {
+      weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+        params: {
+          lat,
+          lon,
+          units: 'metric',
+          appid: apiKey
+        }
+      });
+    }
+    // If q (city) is provided, use it to search for weather by city name
+    else if (q) {
+      weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+        params: {
+          q,
+          units: 'metric',
+          appid: apiKey
+        }
+      });
+    }
 
     res.json(weatherResponse.data); // Return the weather data to the frontend
   } catch (error) {
