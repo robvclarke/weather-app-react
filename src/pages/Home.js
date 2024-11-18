@@ -31,7 +31,7 @@ function Home() {
     setErrorMessage(null);
     try {
       const weatherResponse = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/weather?q=${city}&units=metric&appid=${apiKey}`
+        `${process.env.REACT_APP_BACKEND_URL}weather?q=${city}&units=metric&appid=${apiKey}`
       );      
       setData(weatherResponse.data);
       setLocation(city);
@@ -51,7 +51,7 @@ function Home() {
   
     try {
       const weatherResponse = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
+        `${process.env.REACT_APP_BACKEND_URL}weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
       );
       console.log("Weather data:", weatherResponse.data); // Log the weather data
       const city = weatherResponse.data.name;
