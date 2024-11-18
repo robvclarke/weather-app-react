@@ -2,6 +2,7 @@
   "name": "weather-app-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@stripe/react-stripe-js": "^2.8.1",
