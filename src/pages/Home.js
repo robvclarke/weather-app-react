@@ -47,21 +47,22 @@ function Home() {
   };
 
   const fetchWeatherByCoordinates = async (lat, lon) => {
-    setIsLoading(true);
+    console.log("Fetching weather for coordinates:", lat, lon); // Log the coordinates
+  
     try {
       const weatherResponse = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
       );
+      console.log("Weather data:", weatherResponse.data); // Log the weather data
       const city = weatherResponse.data.name;
       setData(weatherResponse.data);
       setLocation(city);
       fetchForecast(city);
       fetchBackgroundImage(city);
       setShowHeader(false);
-      setLocationAllowed(true);
     } catch (error) {
       console.error("Error fetching weather data", error);
-      setLocationAllowed(false);
+      setErrorMessage("Could not retrieve weather data. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -96,9 +97,12 @@ function Home() {
 
   const requestUserLocation = () => {
     setIsLoading(true);
+    console.log("Requesting user location...");
+  
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+        console.log("Location retrieved:", latitude, longitude); // Log the coordinates
         fetchWeatherByCoordinates(latitude, longitude);
         setShowLocationPrompt(false);
       },
