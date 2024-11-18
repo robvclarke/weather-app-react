@@ -10,8 +10,10 @@ import { useForm } from "react-hook-form";
 function Home() {
   const [data, setData] = useState({});
   const [forecastData, setForecastData] = useState([]);
+  //const [location, setLocation] = useState('');
   const [showHeader, setShowHeader] = useState(true);
   const [backgroundImage, setBackgroundImage] = useState(null);
+  //const [locationAllowed, setLocationAllowed] = useState(false);
   const [showLocationPrompt, setShowLocationPrompt] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -21,18 +23,15 @@ function Home() {
   const apiKey = "0c52510bae0c2562825677b090d11b6b";
   const unsplashKey = "PGJKpfliiakxMxS97n55E2Ke2BAgBFW4S-Cx_BCZuxw";
 
-  useEffect(() => {
-    console.log("showLocationPrompt:", showLocationPrompt);  // Log state for debugging
-  }, [showLocationPrompt]);
-
   const fetchWeatherByCity = async (city) => {
     setIsLoading(true);
     setErrorMessage(null);
     try {
       const weatherResponse = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/weather?q=${city}&units=metric&appid=${apiKey}`
-      );
+      );      
       setData(weatherResponse.data);
+      setLocation(city);
       fetchForecast(city);
       fetchBackgroundImage(city);
       setShowHeader(false);
@@ -52,11 +51,14 @@ function Home() {
       );
       const city = weatherResponse.data.name;
       setData(weatherResponse.data);
+      setLocation(city);
       fetchForecast(city);
       fetchBackgroundImage(city);
       setShowHeader(false);
+      setLocationAllowed(true);
     } catch (error) {
       console.error("Error fetching weather data", error);
+      setLocationAllowed(false);
     } finally {
       setIsLoading(false);
     }
@@ -99,11 +101,44 @@ function Home() {
       },
       (error) => {
         console.error("Geolocation error:", error);
-        setShowLocationPrompt(false);  // Hide location prompt if geolocation fails
+        setLocationAllowed(false);
+        setShowLocationPrompt(false);
         setIsLoading(false);
       },
       { enableHighAccuracy: true }
     );
+  };
+
+  useEffect(() => {
+    if (showLocationPrompt) {
+      setLocationAllowed(false);
+    }
+  }, [showLocationPrompt]);
+
+  const getWeatherEmoji = (weatherId) => {
+    switch (true) {
+      case (weatherId >= 200 && weatherId < 300):
+        return "⛈️";
+      case (weatherId >= 300 && weatherId < 400):
+        return "🌨️";
+      case (weatherId >= 500 && weatherId < 600):
+        return "🌨️";
+      case (weatherId >= 600 && weatherId < 700):
+        return "❄️";
+      case (weatherId >= 700 && weatherId < 800):
+        return "🌫️";
+      case (weatherId === 800):
+        return "🌞";
+      case (weatherId >= 801 && weatherId < 810):
+        return "☁️";
+      default:
+        return "⁇";
+    }
+  };
+
+  const getMapUrl = (city) => {
+    const googleMapsApiKey = "AIzaSyA2DqzlChVXzYUJnwV9NS_VUOvXXXOfiyU";
+    return `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(city)}`;
   };
 
   return (
@@ -145,6 +180,7 @@ function Home() {
             </div>
           )}
 
+          {/* Show the H1 title only when data hasn't loaded yet */}
           {showHeader && !data.name && (
             <div className="app__title-container">
               <h1 className="app__title">Clarke Weather Inc.</h1>
@@ -237,6 +273,7 @@ function Home() {
             </div>
           )}
 
+          {/* Google Maps Embed */}
           {data.name && (
             <div className="app__map">
               <iframe
@@ -246,7 +283,7 @@ function Home() {
                 style={{ border: 0 }}
                 src={getMapUrl(data.name)}
                 allowFullScreen
-                title="Location map of {data.name}"
+                title="Location map of {data.name}" // Add a title for accessibility
               ></iframe>
             </div>
           )}
