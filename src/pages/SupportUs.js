@@ -131,7 +131,7 @@ function SupportUs() {
         </div>
         
         <div className="support-card__image">
-          <img src={supportImage} alt="Supporting Clarke Weather Inc." />
+          <img src={supportImage} alt="Supporting Clarke Weather Inc." loading="lazy"/>
         </div>
       </div>
     </div>

@@ -70,7 +70,7 @@ function ContactUs() {
           </form>
         </div>
         <div className="contact-card__image">
-          <img src={contactImage} alt="Get in touch with Clarke Weather Inc." />
+          <img src={contactImage} alt="Get in touch with Clarke Weather Inc." loading="lazy" />
         </div>
       </div>
     </div>

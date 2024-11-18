@@ -66,7 +66,7 @@ function About() {
           </p>
         </div>
         <div className="about-card__image">
-          <img src={ceoImage} alt="CEO of Clarke Weather Inc." />
+          <img src={ceoImage} alt="CEO of Clarke Weather Inc." loading="lazy"/>
         </div>
       </div>
 
@@ -95,7 +95,7 @@ function About() {
           </p>
         </div>
         <div className="about-card__image">
-          <img src={dublinImage} alt="Dublin, Ireland" />
+          <img src={dublinImage} alt="Dublin, Ireland" loading="lazy" />
         </div>
       </div>
 
@@ -123,7 +123,7 @@ function About() {
           </p>
         </div>
         <div className="about-card__image">
-          <img src={promiseImage} alt="Sustainability" />
+          <img src={promiseImage} alt="Sustainability image of bird soaring" loading="lazy" />
         </div>
       </div>
     </div>
