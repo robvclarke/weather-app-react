@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
 app.use(helmet()); // Secure HTTP headers
 app.use(morgan('combined')); // Log HTTP requests
 app.use(cors({
-  origin: 'https://salty-sea-56494-33b3c48feb13.herokuapp.com', // Heroku frontend URL
+  origin: 'https://clarke-weather-app-frontend-2902ebf9b6e7.herokuapp.com', // Updated to match new frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
@@ -67,13 +67,6 @@ app.post('/create-payment-intent', async (req, res) => {
       amount: amount, // Amount in cents
       currency: 'eur', // Your desired currency
       payment_method: paymentMethodId,
-      // Removed confirmation_method and confirm to avoid double confirmation
-      // confirmation_method: 'manual',
-      // confirm: true,
-      // Optionally, enable automatic payment methods
-      // automatic_payment_methods: {
-      //   enabled: true,
-      // },
     });
 
     console.log('Payment Intent created:', paymentIntent); // Log details

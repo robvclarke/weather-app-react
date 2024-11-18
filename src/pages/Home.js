@@ -23,6 +23,9 @@ function Home() {
   const apiKey = "0c52510bae0c2562825677b090d11b6b";
   const unsplashKey = "PGJKpfliiakxMxS97n55E2Ke2BAgBFW4S-Cx_BCZuxw";
 
+  // Use the Google Maps API key from .env
+  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
   const fetchWeatherByCity = async (city) => {
     setIsLoading(true);
     setErrorMessage(null);
@@ -137,7 +140,6 @@ function Home() {
   };
 
   const getMapUrl = (city) => {
-    const googleMapsApiKey = "AIzaSyA2DqzlChVXzYUJnwV9NS_VUOvXXXOfiyU";
     return `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(city)}`;
   };
 
