@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const axios = require('axios'); // Required for making API calls to the weather service
 
 // Optional Middleware Imports
 const morgan = require('morgan'); // For logging HTTP requests
@@ -33,7 +34,31 @@ app.use(cors({
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-// Define Your Routes Here
+// Define Weather Route
+app.get('/weather', async (req, res) => {
+  const { lat, lon } = req.query; // Extract lat and lon from query parameters
+
+  if (!lat || !lon) {
+    return res.status(400).json({ error: 'Latitude and longitude are required.' });
+  }
+
+  try {
+    const apiKey = process.env.OPENWEATHERMAP_API_KEY; // Assuming you have the API key in your environment variables
+    const weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+      params: {
+        lat,
+        lon,
+        units: 'metric',
+        appid: apiKey
+      }
+    });
+
+    res.json(weatherResponse.data); // Return the weather data to the frontend
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    res.status(500).json({ error: 'Failed to fetch weather data. Please try again later.' });
+  }
+});
 
 // Example: Contact Form Submission
 app.post('/contact', (req, res) => {
