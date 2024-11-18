@@ -10,10 +10,10 @@ import { useForm } from "react-hook-form";
 function Home() {
   const [data, setData] = useState({});
   const [forecastData, setForecastData] = useState([]);
-  //const [location, setLocation] = useState('');
+  const [location, setLocation] = useState('');
   const [showHeader, setShowHeader] = useState(true);
   const [backgroundImage, setBackgroundImage] = useState(null);
-  //const [locationAllowed, setLocationAllowed] = useState(false);
+  const [locationAllowed, setLocationAllowed] = useState(false);
   const [showLocationPrompt, setShowLocationPrompt] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
