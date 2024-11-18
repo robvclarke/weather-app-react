@@ -123,7 +123,7 @@ function About() {
           </p>
         </div>
         <div className="about-card__image">
-          <img src={promiseImage} alt="Sustainability image of bird soaring" loading="lazy" />
+          <img src={promiseImage} alt="A bird flying over a beach" loading="lazy" />
         </div>
       </div>
     </div>

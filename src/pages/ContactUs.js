@@ -13,7 +13,7 @@ function ContactUs() {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      await axios.post("http://localhost:5001/contact", data);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/contact`, data);
       navigate("/message-sent"); // Navigate to the message sent page
     } catch (error) {
       console.error("Error sending message:", error);

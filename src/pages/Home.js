@@ -28,8 +28,8 @@ function Home() {
     setErrorMessage(null);
     try {
       const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
-      );
+        `${process.env.REACT_APP_BACKEND_URL}/weather?q=${city}&units=metric&appid=${apiKey}`
+      );      
       setData(weatherResponse.data);
       setLocation(city);
       fetchForecast(city);
@@ -47,7 +47,7 @@ function Home() {
     setIsLoading(true);
     try {
       const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
+        `${process.env.REACT_APP_BACKEND_URL}/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
       );
       const city = weatherResponse.data.name;
       setData(weatherResponse.data);
@@ -283,6 +283,7 @@ function Home() {
                 style={{ border: 0 }}
                 src={getMapUrl(data.name)}
                 allowFullScreen
+                title="Location map of {data.name}" // Add a title for accessibility
               ></iframe>
             </div>
           )}

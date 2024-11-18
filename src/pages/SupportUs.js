@@ -59,7 +59,7 @@ function SupportUs() {
 
       // Create Payment Intent on the backend
       console.log("Sending POST request to backend to create Payment Intent...");
-      const response = await axios.post("http://localhost:5001/create-payment-intent", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/create-payment-intent`, {
         amount: amount * 100, // Convert to cents
         paymentMethodId: paymentMethod.id,
       });
