@@ -124,6 +124,10 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
   res.json({ received: true });
 });
 
+app.get('/', (req, res) => {
+  res.send('Backend is running');
+});
+
 // Start the Server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
