@@ -101,26 +101,26 @@ The application will be accessible at `http://localhost:3000` in your browser.
 ├── project-structure.txt
 ├── public
 └── src
-
-src/: Main source code for the project.
-components/: Contains reusable UI components (e.g., buttons, form elements, etc.).
-pages/: Main page components that correspond to different views of the app, including:
-Home.js: The landing page for the weather application.
-About.js: Information about the app and its creator.
-SupportUs.js: A page for users to donate and support the app.
-ThankYou.js: A page displayed after users make a donation.
-assets/: Stores image assets like icons, background images, and patterns.
-public/: Contains static files and public assets (e.g., index.html, favicon.ico).
-backend/: Contains server-side code that handles API requests, payment processing, and email functionality through Express.js.
-build/: Contains the production build of the frontend, generated after running npm run build.
-node_modules/: Contains all the installed dependencies for both frontend and backend.
-package-lock.json: Ensures consistent dependencies across environments.
-package.json: Contains project metadata, dependencies, and scripts.
-project-structure.txt: Document describing the project folder structure.
-Environment Configurations:/: .env files for managing API keys and environment variables.
-Frontend .env: Contains environment variables for the frontend, such as REACT_APP_BACKEND_URL, REACT_APP_STRIPE_PUBLIC_KEY, etc.
-Backend .env: Contains environment variables for the backend, including sensitive information like STRIPE_SECRET_KEY, OPENWEATHERMAP_API_KEY, and email credentials.
 ```
+
+- **src/**: Main source code for the project.
+- **components/**: Contains reusable UI components (e.g., buttons, form elements, etc.).
+- **pages/**: Main page components that correspond to different views of the app, including:
+- **Home.js**: The landing page for the weather application.
+- **About.js**: Information about the app and its creator.
+- **SupportUs.js**: A page for users to donate and support the app.
+- **ThankYou.js**: A page displayed after users make a donation.
+- **assets/**: Stores image assets like icons, background images, and patterns.
+- **public/**: Contains static files and public assets (e.g., index.html, favicon.ico).
+- **backend/**: Contains server-side code that handles API requests, payment processing, and email functionality through Express.js.
+- **build/**: Contains the production build of the frontend, generated after running npm run build.
+- **node_modules/**: Contains all the installed dependencies for both frontend and backend.
+- **package-lock.json/**: Ensures consistent dependencies across environments.
+- **package.json**: Contains project metadata, dependencies, and scripts.
+- **project-structure.txt**: Document describing the project folder structure.
+- **Environment Configurations:/**: .env files for managing API keys and environment variables.
+- **Frontend .env**: Contains environment variables for the frontend, such as REACT_APP_BACKEND_URL, REACT_APP_STRIPE_PUBLIC_KEY, etc.
+- **Backend .env**: Contains environment variables for the backend, including sensitive information like STRIPE_SECRET_KEY, OPENWEATHERMAP_API_KEY, and email credentials.
 
 
 ## API Usage
