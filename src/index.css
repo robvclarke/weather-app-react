@@ -630,18 +630,9 @@ html, body {
   opacity: 1; /* Set to 1 if you want it to be visible immediately */
 }
 
-/* Support Card Text Styling */
-.support-card__text {
-  padding: 2rem;
-  color: #494949; /* Text color */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 /* Headings and paragraphs in the text section */
-.support-card__text h1 {
+.support-card__text h1,
+.support-card__text h3 {
   font-size: 2rem;
   margin-bottom: 1rem;
   font-family: Orbitron, sans-serif; /* Use Orbitron font */
@@ -680,6 +671,7 @@ html, body {
 /* Custom Amount Input Styling */
 .payment-form input[type="number"] {
   width: 100%;
+  min-width: 250px; /* Set minimum width */
   max-width: 400px;
   padding: 10px;
   font-size: 1rem;
@@ -688,6 +680,18 @@ html, body {
   border-radius: 4px;
   box-sizing: border-box;
   text-align: center;
+}
+
+/* Stripe form element styling */
+.StripeElement {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 250px; /* Ensure Stripe Element has a minimum width */
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #0000FF;
+  border-radius: 4px;
+  background: #ffffff;
 }
 
 /* Button Styling */
@@ -702,6 +706,7 @@ html, body {
   margin-top: 1rem;
   font-family: Orbitron;
   font-weight: 700;
+  text-align: left; /* Align button to the left */
 }
 
 .primary-button:hover {
@@ -735,15 +740,26 @@ html, body {
   text-align: center;
 }
 
-/* Stripe form element styling */
+/* Align the button to the left */
+.payment-form button {
+  margin-left: 0;
+  text-align: left;
+}
+
+/* Ensure the form is not too narrow */
+.payment-form input[type="number"] {
+  min-width: 250px;
+}
+
+.payment-form {
+  text-align: left;
+}
+
+/* Add margins above the labels */
+.suggested-amounts,
+.payment-form input[type="number"],
 .StripeElement {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #0000FF;
-  border-radius: 4px;
-  background: #ffffff;
+  margin-top: 10px;
 }
 /* Thank You Page Container */
 .thank-you-page {
