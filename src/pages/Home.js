@@ -30,7 +30,7 @@ function Home() {
     setIsLoading(true);
     setErrorMessage(null);
     try {
-      const apiUrl = `${process.env.REACT_APP_BACKEND_URL}weather?q=${city}&units=metric&appid=${apiKey}`;
+      const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/weather?q=${city}&units=metric&appid=${apiKey}`;
       console.log('API URL:', apiUrl);  // Log the full API URL
       const weatherResponse = await axios.get(apiUrl);      
       setData(weatherResponse.data);
@@ -50,7 +50,7 @@ function Home() {
     console.log("Fetching weather for coordinates:", lat, lon); // Log the coordinates
     
     try {
-      const apiUrl = `${process.env.REACT_APP_BACKEND_URL}weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+      const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
       console.log('API URL:', apiUrl);  // Log the full API URL
       const weatherResponse = await axios.get(apiUrl);
       console.log("Weather data:", weatherResponse.data); // Log the weather data
