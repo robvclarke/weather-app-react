@@ -1018,7 +1018,13 @@ html, body {
   border: 1px solid #0000FF;
   border-radius: 4px;
   box-sizing: border-box; /* Ensures padding is included in width */
-  text-align: center; /* Keep the text centered */
+  text-align: left; /* Keep the text centered */
+}
+
+/* Placeholder text alignment */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  text-align: left; /* Align placeholder text to the left */
 }
 
 /* Ensure the form fields grow properly */
