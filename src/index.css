@@ -693,7 +693,7 @@ html, body {
 .payment-form input[type="number"] {
   width: 100%;
   min-width: 250px; /* Set minimum width */
-  max-width: 400px;
+  max-width: 600px;  /* Updated max-width for wider input */
   padding: 10px;
   font-size: 1rem;
   margin-bottom: 1rem;
@@ -708,6 +708,7 @@ html, body {
   box-sizing: border-box;
   width: 100%;
   min-width: 250px; /* Ensure Stripe Element has a minimum width */
+  max-width: 600px;  /* Updated max-width for Stripe element */
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #0000FF;
@@ -756,9 +757,9 @@ html, body {
 /* Payment Form Styling */
 .payment-form {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;  /* Ensure the form itself is wider */
   margin: 1rem auto;
-  text-align: center;
+  text-align: left; /* Align text and form elements to the left */
 }
 
 /* Align the button to the left */
