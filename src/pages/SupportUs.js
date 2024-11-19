@@ -1,4 +1,3 @@
-// SupportUs.js
 import React, { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
@@ -106,28 +105,36 @@ function SupportUs() {
             Your support helps us continue providing accurate and timely weather updates to our community. Thank you for being part of our journey.
           </p>
           
-          <div className="suggested-amounts">
-            <button type="button" onClick={() => handleSuggestedAmount(5)}>€5</button>
-            <button type="button" onClick={() => handleSuggestedAmount(10)}>€10</button>
-            <button type="button" onClick={() => handleSuggestedAmount(20)}>€20</button>
-            <button type="button" onClick={() => handleSuggestedAmount(50)}>€50</button>
+          {/* Suggested Donations label */}
+          <div>
+            <h3>Suggested Donations:</h3>
+            <div className="suggested-amounts">
+              <button type="button" onClick={() => handleSuggestedAmount(5)}>€5</button>
+              <button type="button" onClick={() => handleSuggestedAmount(10)}>€10</button>
+              <button type="button" onClick={() => handleSuggestedAmount(20)}>€20</button>
+              <button type="button" onClick={() => handleSuggestedAmount(50)}>€50</button>
+            </div>
           </div>
           
-          <form onSubmit={handleSubmit} className="payment-form">
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="Enter Amount"
-              required
-              min="1"
-            />
-            <CardElement className="StripeElement" />
-            {error && <div className="error-message">{error}</div>}
-            <button type="submit" className="primary-button" disabled={!stripe || !amount || isSubmitting}>
-              {isSubmitting ? "Processing..." : `Donate €${amount || ""}`}
-            </button>
-          </form>
+          {/* Other Amount label */}
+          <div>
+            <h3>Other Amount</h3>
+            <form onSubmit={handleSubmit} className="payment-form">
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter Amount"
+                required
+                min="1"
+              />
+              <CardElement className="StripeElement" />
+              {error && <div className="error-message">{error}</div>}
+              <button type="submit" className="primary-button" disabled={!stripe || !amount || isSubmitting}>
+                {isSubmitting ? "Processing..." : `Donate €${amount || ""}`}
+              </button>
+            </form>
+          </div>
         </div>
         
         <div className="support-card__image">
