@@ -696,8 +696,8 @@ html, body {
 
 /* Payment Amount Label Styling */
 .payment-form label {
-  font-size: 0.9rem; /* Smaller font size */
-  color: #0000FF; /* Blue color for labels */
+  font-size: 20px; /* Smaller font size */
+  color: #1E1E1E; /* Blue color for labels */
   font-family: Orbitron, sans-serif;
   margin-bottom: 0.5rem;
   text-align: left;

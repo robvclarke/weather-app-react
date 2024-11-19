@@ -107,7 +107,7 @@ function SupportUs() {
           
           {/* Suggested Donations label */}
           <div>
-            <h3>Suggested Donations:</h3>
+            <h3 className="form-label">Suggested Donations:</h3>
             <div className="suggested-amounts">
               <button type="button" onClick={() => handleSuggestedAmount(5)}>€5</button>
               <button type="button" onClick={() => handleSuggestedAmount(10)}>€10</button>
@@ -118,19 +118,17 @@ function SupportUs() {
 
           {/* Other Amount label */}
           <div>
-            <h3>Other Amount</h3>
+            <h3 className="form-label">Other Amount</h3>
             <form onSubmit={handleSubmit} className="payment-form">
-              <label htmlFor="amount">Enter Amount</label>
               <input
                 type="number"
-                id="amount"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="Enter Amount"
                 required
                 min="1"
               />
-              <label htmlFor="payment-details">Payment Details</label>
+              <h3 className="form-label">Payment Details</h3>
               <CardElement className="StripeElement" />
               {error && <div className="error-message">{error}</div>}
               <button type="submit" className="primary-button" disabled={!stripe || !amount || isSubmitting}>
