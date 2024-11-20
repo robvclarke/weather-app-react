@@ -63,7 +63,6 @@ REACT_APP_OPENWEATHER_API_KEY=your_openweather_api_key
 REACT_APP_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
 REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
 REACT_APP_STRIPE_API_KEY=your_stripe_api_key
-For the backend, create a .env file and add:
 ```
 
 For the backend, create a .env file and add:
