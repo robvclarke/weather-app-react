@@ -5,6 +5,11 @@
 
 A dynamic weather application that provides current weather information and a five-day forecast based on location input. Built with React, it integrates multiple third-party APIs to deliver a visually engaging and user-friendly weather experience. 
 
+## Deployment
+
+- **Frontend**: [https://clarke-weather-app-frontend-2902ebf9b6e7.herokuapp.com/](https://clarke-weather-app-frontend-2902ebf9b6e7.herokuapp.com/)
+- **Backend**: [https://clarke-weather-app-backend-4295b05e7a22.herokuapp.com/](https://clarke-weather-app-backend-4295b05e7a22.herokuapp.com/)
+
 ## Features
 - Displays current weather conditions and a five-day forecast.
 - Auto-updates background image based on city using the Unsplash API.
@@ -26,11 +31,6 @@ A dynamic weather application that provides current weather information and a fi
 - **Nodemailer**: For sending emails through the contact form.
 - **Express.js**: Backend framework for routing, handling API requests, and Stripe integration.
 - **Heroku**: Deployment platform for both frontend and backend.
-
-## Deployment
-
-- **Frontend**: [https://clarke-weather-app-frontend-2902ebf9b6e7.herokuapp.com/](https://clarke-weather-app-frontend-2902ebf9b6e7.herokuapp.com/)
-- **Backend**: [https://clarke-weather-app-backend-4295b05e7a22.herokuapp.com/](https://clarke-weather-app-backend-4295b05e7a22.herokuapp.com/)
 
 ## Prerequisites
 - **Node.js**: Required to manage dependencies and run the application.
