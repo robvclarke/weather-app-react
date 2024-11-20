@@ -5,7 +5,7 @@ import promiseImage from "../assets/Sustainability.png";
 
 // The About page component, where we display information about Clarke Weather Inc.
 function About() {
-  // Ref to keep track of the cards for the IntersectionObserver
+  // Ref to keep track of the cards for the IntersectionObserver Animation
   const cardRefs = useRef([]);
 
   // useEffect hook to initialize the IntersectionObserver for fading in/out elements as they enter/exit the viewport
