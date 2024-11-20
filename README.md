@@ -10,6 +10,10 @@ A dynamic weather application that provides current weather information and a fi
 - **Frontend**: [https://clarke-weather-app-frontend-2902ebf9b6e7.herokuapp.com/](https://clarke-weather-app-frontend-2902ebf9b6e7.herokuapp.com/)
 - **Backend**: [https://clarke-weather-app-backend-4295b05e7a22.herokuapp.com/](https://clarke-weather-app-backend-4295b05e7a22.herokuapp.com/)
 
+## Documentation
+
+- **Documentation**: [React Weather App Documentation](https://savory-spruce-322.notion.site/React-Weather-App-Documentation-1308035cd36080aeb90fc8fff270f0ea?pvs=4)
+
 ## Features
 - Displays current weather conditions and a five-day forecast.
 - Auto-updates background image based on city using the Unsplash API.
