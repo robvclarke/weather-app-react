@@ -18,6 +18,8 @@ A dynamic weather application that provides current weather information and a fi
 
 - **Github Repository**: [Github Repository for Project](https://github.com/robvclarke/weather-app-react)
 
+- **Video Presentation**: [Video Presentation and Demo of Application](https://drive.google.com/file/d/1icghr6wnK57KZglNiBhZ4YnrKy-w7Pei/view?usp=sharing)
+
 ## Features
 - Displays current weather conditions and a five-day forecast.
 - Auto-updates background image based on city using the Unsplash API.
