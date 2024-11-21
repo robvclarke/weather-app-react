@@ -12,7 +12,11 @@ A dynamic weather application that provides current weather information and a fi
 
 ## Documentation
 
-- **Documentation**: [React Weather App Documentation](https://savory-spruce-322.notion.site/React-Weather-App-Documentation-1308035cd36080aeb90fc8fff270f0ea?pvs=4)
+- **Documentation**: [React Weather App Documentation on Notion](https://savory-spruce-322.notion.site/React-Weather-App-Documentation-1308035cd36080aeb90fc8fff270f0ea?pvs=4)
+
+- **Google Slides Project Presentation**: [Google Slides Project Presentation](https://docs.google.com/presentation/d/1bdEZWVBGt_bUfp7q9w_m2chgMOGuMUlHXnDdHhgoqg8/edit?usp=sharing)
+
+- **Github Repository**: [Github Repository for Project](https://github.com/robvclarke/weather-app-react)
 
 ## Features
 - Displays current weather conditions and a five-day forecast.
